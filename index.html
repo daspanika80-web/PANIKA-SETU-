@@ -2,46 +2,50 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PANIKA SETU</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f3f4f6;color:#222;padding-bottom:70px}
-button{border:0;cursor:pointer;font-family:inherit}
-header{background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 7px #0002}
-.top{display:flex;justify-content:space-between;align-items:center;padding:12px 15px}
+body{font-family:Arial,sans-serif;background:#f2f3f5;color:#222;padding-bottom:75px}
+button{font-family:inherit;cursor:pointer;border:0}
+header{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 1px 7px #0002}
+.top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 15px}
 .logo{font-size:21px;font-weight:800;color:#8b2c92}
-.logo small{display:block;font-size:9px;color:#777}
+.logo small{display:block;font-size:9px;color:#777;margin-top:2px}
 .icons{display:flex;gap:7px}
-.ic{width:38px;height:38px;border-radius:50%;background:#f0f1f4;font-size:18px}
-.search{margin:0 15px 12px;padding:11px 15px;background:#f0f1f4;border-radius:25px;color:#777}
+.ic{width:39px;height:39px;border-radius:50%;background:#f0f1f4;font-size:18px}
+.search{margin:0 15px 11px;background:#f0f1f4;border-radius:25px;padding:11px 15px;color:#777}
 main{max-width:650px;margin:auto}
-.page{display:none}.page.on{display:block}
-.stories{display:flex;gap:13px;overflow:auto;background:white;padding:13px 15px}
-.story{min-width:60px;text-align:center;font-size:11px}
-.story img{width:55px;height:55px;border-radius:50%;object-fit:cover;border:3px solid #8b2c92;padding:2px}
+.page{display:none}.page.active{display:block}
+.stories{display:flex;gap:13px;overflow-x:auto;background:#fff;padding:13px 15px}
+.story{min-width:62px;text-align:center;font-size:11px}
+.story img{width:55px;height:55px;border-radius:50%;border:3px solid #8b2c92;padding:2px;object-fit:cover}
 .card{background:#fff;margin:10px 0;padding:15px;border-radius:14px;box-shadow:0 1px 5px #0001}
 .head{display:flex;align-items:center;gap:10px}
 .avatar{width:45px;height:45px;border-radius:50%;background:#8b2c92;color:white;display:grid;place-items:center;font-weight:bold;font-size:20px}
 .name{font-weight:bold}.time{font-size:11px;color:#888}
 .post{line-height:1.5;margin:13px 0}
 .actions{display:flex;justify-content:space-around;border-top:1px solid #eee;padding-top:9px}
-.actions button{background:white;padding:6px;color:#555}
-.nav{position:fixed;bottom:0;left:0;right:0;height:65px;background:#fff;display:flex;justify-content:space-around;align-items:center;box-shadow:0 -2px 10px #0002;z-index:10}
+.actions button{background:#fff;color:#555;padding:7px}
+.primary{width:100%;padding:13px;background:#8b2c92;color:#fff;border-radius:10px;margin-top:10px}
+.input{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:10px}
+.link{background:none;color:#8b2c92;margin-top:14px}
+.nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;display:flex;justify-content:space-around;align-items:center;box-shadow:0 -2px 10px #0002;z-index:30}
 .nav button{background:none;color:#666;font-size:11px}
 .nav span{display:block;font-size:21px}
-.nav .active{color:#8b2c92}
-.plus{width:48px;height:48px!important;border-radius:50%;background:#8b2c92!important;color:#fff!important;font-size:27px!important}
-.form{padding:25px}
-.form h2{text-align:center;color:#8b2c92;margin-bottom:20px}
-input{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:10px}
-.primary{width:100%;padding:13px;background:#8b2c92;color:#fff;border-radius:10px;margin-top:8px}
-.link{background:none;color:#8b2c92;margin-top:15px}
+.nav .selected{color:#8b2c92;font-weight:bold}
+.plus{width:48px;height:48px!important;border-radius:50%;background:#8b2c92!important;color:#fff!important;font-size:28px!important}
 .profile{text-align:center}
-.big{width:90px;height:90px;border-radius:50%;background:#8b2c92;color:#fff;margin:10px auto;display:grid;place-items:center;font-size:35px}
+.bigavatar{width:90px;height:90px;border-radius:50%;background:#8b2c92;color:#fff;margin:10px auto;display:grid;place-items:center;font-size:35px}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:100}
+.modal.show{display:flex}
+.sheet{background:#fff;width:100%;border-radius:20px 20px 0 0;padding:20px}
+.sheet button{width:100%;padding:14px;margin:5px 0;border-radius:10px;background:#f2f2f4}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:10px 16px;border-radius:20px;display:none;z-index:200}
 </style>
 </head>
 
@@ -51,16 +55,17 @@ input{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:1
 <div class="top">
 <div class="logo">PANIKA SETU<small>समाज को जोड़ने वाला डिजिटल सेतु</small></div>
 <div class="icons">
-<button class="ic" onclick="alert('Search')">🔍</button>
-<button class="ic" onclick="alert('Notifications')">🔔</button>
+<button class="ic" onclick="searchBox()">🔍</button>
+<button class="ic" onclick="notify()">🔔</button>
 </div>
 </div>
-<div class="search">🔍 लोग, रिश्ते, कार्यक्रम खोजें...</div>
+<div class="search" onclick="searchBox()">🔍 लोग, रिश्ते, कार्यक्रम खोजें...</div>
 </header>
 
 <main>
 
-<section id="home" class="page on">
+<section id="home" class="page active">
+
 <div class="stories">
 <div class="story"><img src="https://i.pravatar.cc/100?img=12">आपकी Story</div>
 <div class="story"><img src="https://i.pravatar.cc/100?img=5">समाज</div>
@@ -69,156 +74,814 @@ input{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:1
 </div>
 
 <div class="card">
-<div class="head"><div class="avatar">P</div><div><div class="name">PANIKA SETU ✓</div><div class="time">सामुदायिक पोस्ट · अभी</div></div></div>
-<div class="post">🙏 PANIKA SETU में आपका स्वागत है। Panika, Kabir Panthi और Manikpuri समाज को जोड़ने वाला डिजिटल मंच।</div>
+<div class="head">
+<div class="avatar">P</div>
+<div>
+<div class="name">PANIKA SETU ✓</div>
+<div class="time">सामुदायिक पोस्ट · अभी</div>
+</div>
+</div>
+
+<div class="post">
+🙏 PANIKA SETU में आपका स्वागत है।<br><br>
+Panika, Kabir Panthi और Manikpuri समाज को जोड़ने वाला डिजिटल मंच।
+</div>
+
 <div class="actions">
 <button onclick="like(this)">👍 पसंद</button>
-<button onclick="alert('Comment')">💬 टिप्पणी</button>
-<button onclick="alert('Share')">↗ साझा</button>
+<button onclick="comment()">💬 टिप्पणी</button>
+<button onclick="sharePost()">↗ साझा</button>
 </div>
 </div>
 
 <div class="card">
 <h3>💍 रिश्ते के लिए परिचय</h3>
-<p style="margin-top:8px">सम्मानपूर्वक परिवारों के बीच संपर्क शुरू करें।</p>
-<button class="primary" onclick="go('events')">रिश्ते देखें</button>
+<p style="margin-top:8px">परिवारों के बीच सम्मानपूर्वक संपर्क शुरू करें।</p>
+<button class="primary" onclick="show('matrimonial')">रिश्ते देखें</button>
 </div>
 
 <div class="card">
 <h3>📅 आने वाले कार्यक्रम</h3>
 <p style="margin:10px 0">समाज के कार्यक्रम यहाँ दिखाई देंगे।</p>
-<button class="primary" onclick="go('events')">Events देखें</button>
+<button class="primary" onclick="show('events')">Events देखें</button>
 </div>
+
 </section>
 
 <section id="events" class="page">
 <div class="card">
 <h2>📅 Events</h2>
-<p style="margin-top:10px">समाज के आने वाले कार्यक्रम यहाँ दिखाई देंगे।</p>
-<button class="primary" onclick="create()">+ Event बनाएं</button>
+<p style="margin:12px 0">समाज के आने वाले कार्यक्रम।</p>
+<button class="primary" onclick="toast('Event create जल्द उपलब्ध होगा')">+ Event बनाएं</button>
 </div>
 </section>
 
 <section id="create" class="page">
 <div class="card">
 <h2>➕ Create</h2>
-<button class="primary" onclick="alert('Post created')">📝 Post</button>
-<button class="primary" onclick="alert('Story created')">⭕ Story</button>
-<button class="primary" onclick="alert('Event created')">📅 Event</button>
+<button class="primary" onclick="toast('Post create')">📝 Post</button>
+<button class="primary" onclick="toast('Story create')">⭕ Story</button>
+<button class="primary" onclick="toast('Event create')">📅 Event</button>
+<button class="primary" onclick="toast('Matrimonial profile create')">💍 Matrimonial Profile</button>
 </div>
 </section>
 
 <section id="chat" class="page">
 <div class="card">
 <h2>💬 Chat</h2>
-<p style="margin-top:10px">Login के बाद community chat यहाँ उपलब्ध होगा।</p>
+<p style="margin:12px 0">Login करने के बाद Chat सुविधा उपलब्ध होगी।</p>
+<button class="primary" onclick="show('profile')">Login / Profile</button>
+</div>
+</section>
+
+<section id="matrimonial" class="page">
+<div class="card">
+<h2>💍 रिश्ते</h2>
+<p style="margin:12px 0">उपयुक्त matrimonial profiles यहाँ दिखाई देंगी।</p>
+<button class="primary" onclick="toast('Profile search')">Profile खोजें</button>
 </div>
 </section>
 
 <section id="profile" class="page">
 <div class="card profile">
-<div class="big" id="letter">P</div>
-<h2 id="pname">PANIKA SETU</h2>
-<p id="pemail">Guest</p>
-<button class="primary" onclick="auth()">Login / Signup</button>
-<button class="link" onclick="logout()">Logout</button>
+
+<div class="bigavatar" id="avatarLetter">P</div>
+
+<h2 id="profileName">Guest</h2>
+<p id="profileEmail">Login नहीं है</p>
+
+<button class="primary" id="loginBtn" onclick="show('auth')">🔐 Login / Signup</button>
+
+<button class="primary hidden" id="logoutBtn" onclick="logout()">🚪 Logout</button>
+
 </div>
 </section>
 
 <section id="auth" class="page">
-<div class="card form">
+<div class="card">
+
 <h2 id="authTitle">Login</h2>
-<input id="name" placeholder="पूरा नाम" style="display:none">
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
+
+<input id="fullName" class="input" placeholder="पूरा नाम" style="display:none">
+
+<input id="email" class="input" type="email" placeholder="Email">
+
+<input id="password" class="input" type="password" placeholder="Password">
+
 <button class="primary" onclick="submitAuth()">Continue</button>
+
 <button class="link" onclick="toggleAuth()">Signup / Login बदलें</button>
+
 </div>
 </section>
 
 </main>
 
 <nav class="nav">
-<button onclick="go('home')" class="active"><span>🏠</span>Home</button>
-<button onclick="go('events')"><span>📅</span>Events</button>
-<button class="plus" onclick="go('create')">+</button>
-<button onclick="go('chat')"><span>💬</span>Chat</button>
-<button onclick="go('profile')"><span>👤</span>Profile</button>
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PANIKA SETU</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f2f3f5;color:#222;padding-bottom:75px}
+button{font-family:inherit;cursor:pointer;border:0}
+header{background:#fff;position:sticky;top:0;z-index:20;box-shadow:0 1px 7px #0002}
+.top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 15px}
+.logo{font-size:21px;font-weight:800;color:#8b2c92}
+.logo small{display:block;font-size:9px;color:#777;margin-top:2px}
+.icons{display:flex;gap:7px}
+.ic{width:39px;height:39px;border-radius:50%;background:#f0f1f4;font-size:18px}
+.search{margin:0 15px 11px;background:#f0f1f4;border-radius:25px;padding:11px 15px;color:#777}
+main{max-width:650px;margin:auto}
+.page{display:none}.page.active{display:block}
+.stories{display:flex;gap:13px;overflow-x:auto;background:#fff;padding:13px 15px}
+.story{min-width:62px;text-align:center;font-size:11px}
+.story img{width:55px;height:55px;border-radius:50%;border:3px solid #8b2c92;padding:2px;object-fit:cover}
+.card{background:#fff;margin:10px 0;padding:15px;border-radius:14px;box-shadow:0 1px 5px #0001}
+.head{display:flex;align-items:center;gap:10px}
+.avatar{width:45px;height:45px;border-radius:50%;background:#8b2c92;color:white;display:grid;place-items:center;font-weight:bold;font-size:20px}
+.name{font-weight:bold}.time{font-size:11px;color:#888}
+.post{line-height:1.5;margin:13px 0}
+.actions{display:flex;justify-content:space-around;border-top:1px solid #eee;padding-top:9px}
+.actions button{background:#fff;color:#555;padding:7px}
+.primary{width:100%;padding:13px;background:#8b2c92;color:#fff;border-radius:10px;margin-top:10px}
+.input{width:100%;padding:13px;margin:7px 0;border:1px solid #ddd;border-radius:10px}
+.link{background:none;color:#8b2c92;margin-top:14px}
+.nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;display:flex;justify-content:space-around;align-items:center;box-shadow:0 -2px 10px #0002;z-index:30}
+.nav button{background:none;color:#666;font-size:11px}
+.nav span{display:block;font-size:21px}
+.nav .selected{color:#8b2c92;font-weight:bold}
+.plus{width:48px;height:48px!important;border-radius:50%;background:#8b2c92!important;color:#fff!important;font-size:28px!important}
+.profile{text-align:center}
+.bigavatar{width:90px;height:90px;border-radius:50%;background:#8b2c92;color:#fff;margin:10px auto;display:grid;place-items:center;font-size:35px}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:100}
+.modal.show{display:flex}
+.sheet{background:#fff;width:100%;border-radius:20px 20px 0 0;padding:20px}
+.sheet button{width:100%;padding:14px;margin:5px 0;border-radius:10px;background:#f2f2f4}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:10px 16px;border-radius:20px;display:none;z-index:200}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="top">
+<div class="logo">PANIKA SETU<small>समाज को जोड़ने वाला डिजिटल सेतु</small></div>
+<div class="icons">
+<button class="ic" onclick="searchBox()">🔍</button>
+<button class="ic" onclick="notify()">🔔</button>
+</div>
+</div>
+<div class="search" onclick="searchBox()">🔍 लोग, रिश्ते, कार्यक्रम खोजें...</div>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+
+<div class="stories">
+<div class="story"><img src="https://i.pravatar.cc/100?img=12">आपकी Story</div>
+<div class="story"><img src="https://i.pravatar.cc/100?img=5">समाज</div>
+<div class="story"><img src="https://i.pravatar.cc/100?img=8">कार्यक्रम</div>
+<div class="story"><img src="https://i.pravatar.cc/100?img=11">परिवार</div>
+</div>
+
+<div class="card">
+<div class="head">
+<div class="avatar">P</div>
+<div>
+<div class="name">PANIKA SETU ✓</div>
+<div class="time">सामुदायिक पोस्ट · अभी</div>
+</div>
+</div>
+
+<div class="post">
+🙏 PANIKA SETU में आपका स्वागत है।<br><br>
+Panika, Kabir Panthi और Manikpuri समाज को जोड़ने वाला डिजिटल मंच।
+</div>
+
+<div class="actions">
+<button onclick="like(this)">👍 पसंद</button>
+<button onclick="comment()">💬 टिप्पणी</button>
+<button onclick="sharePost()">↗ साझा</button>
+</div>
+</div>
+
+<div class="card">
+<h3>💍 रिश्ते के लिए परिचय</h3>
+<p style="margin-top:8px">परिवारों के बीच सम्मानपूर्वक संपर्क शुरू करें।</p>
+<button class="primary" onclick="show('matrimonial')">रिश्ते देखें</button>
+</div>
+
+<div class="card">
+<h3>📅 आने वाले कार्यक्रम</h3>
+<p style="margin:10px 0">समाज के कार्यक्रम यहाँ दिखाई देंगे।</p>
+<button class="primary" onclick="show('events')">Events देखें</button>
+</div>
+
+</section>
+
+<section id="events" class="page">
+<div class="card">
+<h2>📅 Events</h2>
+<p style="margin:12px 0">समाज के आने वाले कार्यक्रम।</p>
+<button class="primary" onclick="toast('Event create जल्द उपलब्ध होगा')">+ Event बनाएं</button>
+</div>
+</section>
+
+<section id="create" class="page">
+<div class="card">
+<h2>➕ Create</h2>
+<button class="primary" onclick="toast('Post create')">📝 Post</button>
+<button class="primary" onclick="toast('Story create')">⭕ Story</button>
+<button class="primary" onclick="toast('Event create')">📅 Event</button>
+<button class="primary" onclick="toast('Matrimonial profile create')">💍 Matrimonial Profile</button>
+</div>
+</section>
+
+<section id="chat" class="page">
+<div class="card">
+<h2>💬 Chat</h2>
+<p style="margin:12px 0">Login करने के बाद Chat सुविधा उपलब्ध होगी।</p>
+<button class="primary" onclick="show('profile')">Login / Profile</button>
+</div>
+</section>
+
+<section id="matrimonial" class="page">
+<div class="card">
+<h2>💍 रिश्ते</h2>
+<p style="margin:12px 0">उपयुक्त matrimonial profiles यहाँ दिखाई देंगी।</p>
+<button class="primary" onclick="toast('Profile search')">Profile खोजें</button>
+</div>
+</section>
+
+<section id="profile" class="page">
+<div class="card profile">
+
+<div class="bigavatar" id="avatarLetter">P</div>
+
+<h2 id="profileName">Guest</h2>
+<p id="profileEmail">Login नहीं है</p>
+
+<button class="primary" id="loginBtn" onclick="show('auth')">🔐 Login / Signup</button>
+
+<button class="primary hidden" id="logoutBtn" onclick="logout()">🚪 Logout</button>
+
+</div>
+</section>
+
+<section id="auth" class="page">
+<div class="card">
+
+<h2 id="authTitle">Login</h2>
+
+<input id="fullName" class="input" placeholder="पूरा नाम" style="display:none">
+
+<input id="email" class="input" type="email" placeholder="Email">
+
+<input id="password" class="input" type="password" placeholder="Password">
+
+<button class="primary" onclick="submitAuth()">Continue</button>
+
+<button class="link" onclick="toggleAuth()">Signup / Login बदलें</button>
+
+</div>
+</section>
+
+</main>
+
+<nav class="nav">
+
+<button onclick="show('home')" id="navHome" class="selected">
+<span>🏠</span>Home
+</button>
+
+<button onclick="show('events')">
+<span>📅</span>Events
+</button>
+
+<button onclick="show('create')" class="plus">+</button>
+
+<button onclick="show('chat')">
+<span>💬</span>Chat
+</button>
+
+<button onclick="show('profile')" id="navProfile">
+<span>👤</span>Profile
+</button>
+
 </nav>
 
+<div id="toastBox" class="toast"></div>
+
 <script>
+
+/* ==============================
+   SUPABASE
+============================== */
+
 const SUPABASE_URL="https://buqkedchdzymiidfburf.supabase.co";
+
+/*
+   IMPORTANT:
+   नीचे अपनी Supabase PUBLISHABLE key डालें।
+   sb_secret वाली key कभी नहीं डालनी है।
+*/
+const SUPABASE_URL="https://buqkedchdzymiidfburf.supabase.co";
+
 const SUPABASE_KEY="sb_publishable_Uj_wF8YNGH0tdiz9Lhm68Q_GHn2nuxf";
 
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const db=supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-let signup=false;
 
-function go(id){
- document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));
- document.getElementById(id).classList.add("on");
- window.scrollTo(0,0);
- document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
+/* ==============================
+   NAVIGATION
+============================== */
+
+function show(id){
+
+document.querySelectorAll(".page").forEach(function(page){
+page.classList.remove("active");
+});
+
+const page=document.getElementById(id);
+
+if(page){
+page.classList.add("active");
 }
 
-function create(){go("create")}
+document.querySelectorAll(".nav button").forEach(function(btn){
+btn.classList.remove("selected");
+});
 
-function like(b){
- b.textContent=b.textContent.includes("पसंद")?"❤️ पसंद":"👍 पसंद";
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
 }
 
-function auth(){go("auth")}
+
+/* ==============================
+   TOAST
+============================== */
+
+function toast(message){
+
+const box=document.getElementById("toastBox");
+
+box.innerText=message;
+box.style.display="block";
+
+setTimeout(function(){
+box.style.display="none";
+},2000);
+
+}
+
+
+/* ==============================
+   BASIC ACTIONS
+============================== */
+
+function like(button){
+
+if(button.innerText.includes("❤️")){
+button.innerText="👍 पसंद";
+}else{
+button.innerText="❤️ पसंद";
+}
+
+}
+
+function comment(){
+
+const text=prompt("अपनी टिप्पणी लिखें:");
+
+if(text){
+toast("टिप्पणी जोड़ दी गई");
+}
+
+}
+
+function sharePost(){
+
+if(navigator.share){
+
+navigator.share({
+title:"PANIKA SETU",
+text:"PANIKA SETU पर पोस्ट देखें"
+});
+
+}else{
+
+navigator.clipboard?.writeText(location.href);
+toast("Website link copy हो गया");
+
+}
+
+}
+
+function searchBox(){
+
+const q=prompt("क्या खोजें?");
+
+if(q){
+toast("Search: "+q);
+}
+
+}
+
+function notify(){
+
+toast("अभी कोई नई notification नहीं है");
+
+}
+
+
+/* ==============================
+   AUTH MODE
+============================== */
+
+let signupMode=false;
 
 function toggleAuth(){
- signup=!signup;
- document.getElementById("authTitle").textContent=signup?"Signup":"Login";
- document.getElementById("name").style.display=signup?"block":"none";
+
+signupMode=!signupMode;
+
+document.getElementById("authTitle").innerText=
+signupMode ? "Signup" : "Login";
+
+document.getElementById("fullName").style.display=
+signupMode ? "block" : "none";
+
 }
+
+
+/* ==============================
+   LOGIN / SIGNUP
+============================== */
 
 async function submitAuth(){
- const email=document.getElementById("email").value.trim();
- const password=document.getElementById("password").value;
- const name=document.getElementById("name").value.trim();
 
- if(!email||!password)return alert("Email और Password भरें");
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+const name=document.getElementById("fullName").value.trim();
 
- let r;
+if(!email || !password){
 
- if(signup){
-   r=await db.auth.signUp({
-     email,password,
-     options:{data:{full_name:name}}
-   });
- }else{
-   r=await db.auth.signInWithPassword({email,password});
- }
+toast("Email और Password भरें");
+return;
 
- if(r.error)return alert(r.error.message);
-
- alert(signup?"Signup successful. Email verify करें अगर confirmation enabled है।":"Login successful!");
- go("profile");
- loadUser();
 }
+
+let result;
+
+if(signupMode){
+
+result=await db.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name
+}
+}
+
+});
+
+}else{
+
+result=await db.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+}
+
+if(result.error){
+
+alert(result.error.message);
+return;
+
+}
+
+toast(signupMode ?
+"Signup successful" :
+"Login successful");
+
+await loadUser();
+
+show("profile");
+
+}
+
+
+/* ==============================
+   USER
+============================== */
 
 async function loadUser(){
- const {data}=await db.auth.getUser();
- if(!data.user)return;
 
- document.getElementById("pemail").textContent=data.user.email||"";
- const n=data.user.user_metadata?.full_name||"User";
- document.getElementById("pname").textContent=n;
- document.getElementById("letter").textContent=n.charAt(0).toUpperCase();
+const result=await db.auth.getUser();
+
+if(result.error || !result.data.user){
+
+return;
+
 }
+
+const user=result.data.user;
+
+const name=
+user.user_metadata?.full_name ||
+user.email?.split("@")[0] ||
+"User";
+
+document.getElementById("profileName").innerText=name;
+
+document.getElementById("profileEmail").innerText=
+user.email || "";
+
+document.getElementById("avatarLetter").innerText=
+name.charAt(0).toUpperCase();
+
+document.getElementById("loginBtn").classList.add("hidden");
+
+document.getElementById("logoutBtn").classList.remove("hidden");
+
+}
+
+
+/* ==============================
+   LOGOUT
+============================== */
 
 async function logout(){
- await db.auth.signOut();
- alert("Logout successful");
- go("home");
+
+const result=await db.auth.signOut();
+
+if(result.error){
+
+alert(result.error.message);
+return;
+
 }
 
+document.getElementById("profileName").innerText="Guest";
+document.getElementById("profileEmail").innerText="Login नहीं है";
+
+document.getElementById("avatarLetter").innerText="P";
+
+document.getElementById("loginBtn").classList.remove("hidden");
+
+document.getElementById("logoutBtn").classList.add("hidden");
+
+toast("Logout successful");
+
+show("home");
+
+}
+
+
+/* ==============================
+   SESSION
+============================== */
+
+db.auth.onAuthStateChange(function(){
+
 loadUser();
+
+});
+
+loadUser();
+
 </script>
 
 </body>
- </html>
+</html>￼Enter<button onclick="show('home')" id="navHome" class="selected">
+<span>🏠</span>Home
+</button>
+
+<button onclick="show('events')">
+<span>📅</span>Events
+</button>
+
+<button onclick="show('create')" class="plus">+</button>
+
+<button onclick="show('chat')">
+<span>💬</span>Chat
+</button>
+
+<button onclick="show('profile')" id="navProfile">
+<span>👤</span>Profile
+</button>
+
+</nav>
+
+<div id="toastBox" class="toast"></div>
+
+<script>
+
+/* ==============================
+   SUPABASE
+============================== */
+
+const SUPABASE_URL="https://buqkedchdzymiidfburf.supabase.co";
+
+/*
+   IMPORTANT:
+   नीचे अपनी Supabase PUBLISHABLE key डालें।
+   sb_secret वाली key कभी नहीं डालनी है।
+*/
+
+const SUPABASE_KEY="PASTE_YOUR_SB_PUBLISHABLE_KEY_HERE";
+
+const db=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* ==============================
+   NAVIGATION
+============================== */
+
+function show(id){
+
+document.querySelectorAll(".page").forEach(function(page){
+page.classList.remove("active");
+});
+
+const page=document.getElementById(id);
+
+if(page){
+page.classList.add("active");
+}
+
+document.querySelectorAll(".nav button").forEach(function(btn){
+btn.classList.remove("selected");
+});
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* ==============================
+   TOAST
+============================== */
+
+function toast(message){
+
+const box=document.getElementById("toastBox");
+
+box.innerText=message;
+box.style.display="block";
+
+setTimeout(function(){
+box.style.display="none";
+},2000);
+
+}
+
+
+/* ==============================
+   BASIC ACTIONS
+============================== */
+
+function like(button){
+
+if(button.innerText.includes("❤️")){
+button.innerText="👍 पसंद";
+}else{
+button.innerText="❤️ पसंद";
+}
+
+}
+
+function comment(){
+ text=prompt("अपनी टिप्पणी लिखें:");
+
+if(text){
+toast("टिप्पणी जोड़ दी गई");
+}
+
+}
+
+function sharePost(){
+
+if(navigator.share){
+
+navigator.share({
+title:"PANIKA SETU",
+text:"PANIKA SETU पर पोस्ट देखें"
+});
+
+}else{
+
+navigator.clipboard?.writeText(location.href);
+toast("Website link copy हो गया");
+
+}
+
+}
+
+function searchBox(){
+
+const q=prompt("क्या खोजें?");
+
+if(q){
+toast("Search: "+q);
+}
+
+}
+
+function notify(){
+
+toast("अभी कोई नई notification नहीं है");
+
+}
+
+
+/* ==============================
+   AUTH MODE
+============================== */
+
+let signupMode=false;
+
+function toggleAuth(){
+
+signupMode=!signupMode;
+
+document.getElementById("authTitle").innerText=
+signupMode ? "Signup" : "Login";
+
+document.getElementById("fullName").style.display=
+signupMode ? "block" : "none";
+
+}
+
+
+/* ==============================
+   LOGIN / SIGNUP
+============================== */
+
+async function submitAuth(){
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+const name=document.getElementById("fullName").value.trim();
+
+if(!email || !password){
+
+toast("Email और Password भरें");
+return;
+
+}
+
+let result;
+
+if(signupMode){
+
+result=await db.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name
+}
+}
+
+});
+
+}else{
+
+result=await db.auth.signInWithPassword({
+
+email:email,
+
+password:password
