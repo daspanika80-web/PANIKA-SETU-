@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12">
+<title>PANIKA SETU — Apna Samaj, Apna Setu</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#080a0f;color:#f5f7fb;font-family:Arial,Helvetica,sans-serif}
+body{min-height:100vh}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{width:100%;max-width:720px;margin:auto;min-height:100vh;background:#080a0f}
+.topbar{position:sticky;top:0;z-index:20;height:64px;background:#0b0d12;border-bottom:1px solid #252a34;display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+.brand{font-weight:800;font-size:20px;letter-spacing:.3px}
+.top-actions{display:flex;gap:8px}
+.icon-btn{width:42px;height:42px;border:0;border-radius:50%;background:#171a22;color:#fff;font-size:22px}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ffb300,#ff006a,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:800;color:white}
+.stories{display:flex;gap:14px;overflow-x:auto;padding:14px 12px;border-bottom:1px solid #1d2129;scrollbar-width:none}
+.stories::-webkit-scrollbar{display:none}
+.story{min-width:70px;text-align:center;font-size:11px;color:#c7cbd4}
+.story-ring{width:62px;height:62px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#ffd600,#ff006a,#8b5cf6);margin:auto auto 6px}
+.story-ring span{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#20242d;border:2px solid #080a0f;font-size:24px}
+.story.add .story-ring{background:#252a34;padding:2px}
+.story.add .story-ring span{position:relative}
+.story.add .story-ring span:after{content:"+";position:absolute;right:-1px;bottom:-1px;background:#fff;color:#111;border-radius:50%;width:20px;height:20px;line-height:19px;font-size:18px}
+.nav{position:sticky;top:64px;z-index:19;background:#0b0d12;border-bottom:1px solid #252a34;display:flex;gap:4px;padding:8px}
+.nav button{flex:1;border:0;background:transparent;color:#9ca3af;padding:8px 4px;border-radius:9px;font-size:12px}
+.nav button.active{background:#1a1f29;color:#fff;font-weight:700}
+.page{display:none}
+.page.active{display:block}
+.card{background:#10131a;border:1px solid #252a34;border-radius:14px;margin:12px;padding:14px}
+.post{margin:12px 0;background:#0d1016;border-left:0;border-right:0;border-radius:0;padding:12px 0;border-top:1px solid #20242d;border-bottom:1px solid #20242d}
+.post-head{display:flex;align-items:center;gap:10px;padding:0 12px 10px}
+.post-name{font-weight:700;font-size:14px}
+.meta{font-size:11px;color:#8e96a5;margin-top:3px}
+.post-text{padding:0 12px 10px;line-height:1.45;font-size:14px}
+.post-img{width:100%;display:block;max-height:560px;object-fit:cover;background:#161a22}
+.post-actions{display:flex;gap:8px;padding:9px 12px 0}
+.action{border:0;background:transparent;color:#b7bdc8;font-size:13px;padding:7px 8px}
+.action.liked{color:#ff3b6b}
+.comment-box{display:none;padding:8px 12px}
+.comment-box input{width:100%;background:#171a22;border:1px solid #303643;color:#fff;border-radius:9px;padding:10px}
+.section-title{font-size:17px;font-weight:800;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.member{background:#151922;border:1px solid #272c36;border-radius:12px;padding:12px;text-align:center}
+.member .avatar{margin:auto}
+.member button{margin-top:9px;border:0;border-radius:8px;padding:8px 12px;background:#2563eb;color:#fff;font-weight:700}
+.profile-head{text-align:center;padding:18px}
+.profile-big{width:90px;height:90px;border-radius:50%;margin:auto;background:linear-gradient(135deg,#ffb300,#ff006a,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800}
+.profile-actions{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.small-btn{border:1px solid #343a47;background:#171a22;color:#fff;border-radius:9px;padding:9px 14px}
+.form input,.form textarea{width:100%;margin:7px 0;background:#171a22;border:1px solid #303643;border-radius:10px;color:#fff;padding:11px}
+.primary{width:100%;border:0;background:#2563eb;color:#fff;border-radius:10px;padding:12px;font-weight:800}
+.chat-row{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #252a34}
+.chat-row:last-child{border-bottom:0}
+.chat-row .avatar{flex:none}
+.empty{text-align:center;color:#8e96a5;padding:30px 10px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:50;align-items:flex-end}
+.modal.open{display:flex}
+.sheet{width:100%;max-width:720px;margin:auto;background:#11151d;border-radius:20px 20px 0 0;border:1px solid #2b313d;padding:18px;max-height:88vh;overflow:auto}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.close{border:0;background:#252a34;color:#fff;border-radius:50%;width:34px;height:34px}
+.create-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.create-item{background:#191d26;border:1px solid #2b313d;color:#fff;border-radius:12px;padding:16px;text-align:left;font-weight:700}
+.toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%);background:#fff;color:#111;padding:11px 16px;border-radius:10px;display:none;z-index:100;font-size:13px;box-shadow:0 5px 25px #000}
+@media(min-width:700px){.modal{align-items:center}.sheet{border-radius:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand">PANIKA SETU</div>
+  <div class="top-actions">
+    <button class="icon-btn" onclick="openCreate()" aria-label="Create">＋</button>
+    <button class="icon-btn" onclick="toast('Notifications feature ready for backend connection')" aria-label="Notifications">♡</button>
+    <button class="icon-btn" onclick="openPage('profile')" aria-label="Profile"><span class="avatar" style="width:30px;height:30px;font-size:12px">P</span></button>
+  </div>
+</header>
+
+<div class="stories">
+  <div class="story add" onclick="openCreate()"><div class="story-ring"><span>＋</span></div>Your story</div>
+  <div class="story"><div class="story-ring"><span>👨</span></div>Samaj</div>
+  <div class="story"><div class="story-ring"><span>🎉</span></div>Events</div>
+  <div class="story"><div class="story-ring"><span>🙏</span></div>Help</div>
+  <div class="story"><div class="story-ring"><span>💍</span></div>Matrimony</div>
+  <div class="story"><div class="story-ring"><span>💰</span></div>Fund</div>
+</div>
+
+<nav class="nav">
+  <button id="navHome" class="active" onclick="openPage('home')">🏠<br>Home</button>
+  <button id="navMembers" onclick="openPage('members')">👥<br>Members</button>
+  <button id="navChat" onclick="openPage('chat')">💬<br>Messages</button>
+  <button id="navProfile" onclick="openPage('profile')">👤<br>Profile</button>
+</nav>
+
+<main id="homePage" class="page active">
+  <div class="card">
+    <div style="font-weight:800">Namaste 🙏</div>
+    <div style="color:#9ca3af;font-size:13px;margin-top:5px">PANIKA SETU — Apna Samaj, Apna Setu</div>
+  </div>
+  <div id="feed"></div>
+</main>
+
+<main id="membersPage" class="page">
+  <div class="card">
+    <div class="section-title">Community Members</div>
+    <input id="memberSearch" class="form input" style="width:100%;background:#171a22;border:1px solid #303643;color:#fff;border-radius:10px;padding:11px" placeholder="Search members..." oninput="renderMembers()">
+  </div>
+  <div id="members" class="grid" style="padding:0 12px 20px"></div>
+</main>
+
+<main id="chatPage" class="page">
+  <div class="card"><div class="section-title">Messages</div><div style="color:#9ca3af;font-size:13px">Community messaging interface</div></div>
+  <div class="card">
+    <div class="chat-row"><div class="avatar">A</div><div><b>Community Admin</b><div class="meta">Welcome to PANIKA SETU</div></div></div>
+    <div class="chat-row"><div class="avatar">S</div><div><b>Samaj Member</b><div class="meta">Messaging will connect to backend later</div></div></div>
+  </div>
+</main>
+
+<main id="profilePage" class="page">
+  <div class="card profile-head">
+    <div class="profile-big">P</div>
+    <h2 style="margin:10px 0 4px">PANIKA SETU Member</h2>
+    <div style="color:#9ca3af;font-size:13px">Apna Samaj, Apna Setu</div>
+    <div class="profile-actions">
+      <button class="small-btn" onclick="openEditProfile()">Edit Profile</button>
+      <button class="small-btn" onclick="toast('Profile link copied')">Share Profile</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="section-title">Community</div>
+    <p style="color:#aab1bd;font-size:13px;line-height:1.6">Events, help requests, community discussions, funds and matrimonial services — all in one place.</p>
+  </div>
+</main>
+</div>
+
+<div id="createModal" class="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet">
+    <div class="sheet-head"><h3 style="margin:0">Create</h3><button class="close" onclick="closeModal()">✕</button></div>
+    <div class="create-grid">
+      <button class="create-item" onclick="openPost()">📝<br>Create Post</button>
+      <button class="create-item" onclick="openPost()">🖼️<br>Photo Post</button>
+      <button class="create-item" onclick="toast('Event form ready for backend');closeModal()">📅<br>Event</button>
+      <button class="create-item" onclick="toast('Help request form ready for backend');closeModal()">🙏<br>Help Request</button>
+      <button class="create-item" onclick="toast('Community fund form ready for backend');closeModal()">💰<br>Community Fund</button>
+      <button class="create-item" onclick="toast('Matrimonial form ready for backend');closeModal()">💍<br>Matrimonial</button>
+    </div>
+  </div>
+</div>
+
+<div id="postModal" class="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet">
+    <div class="sheet-head"><h3 style="margin:0">Create Post</h3><button class="close" onclick="closeModal()">✕</button></div>
+    <div class="form">
+      <textarea id="postText" rows="4" placeholder="Samaj ke saath kuch share karein..."></textarea>
+      <input id="postImage" type="url" placeholder="Photo URL (optional)">
+      <button class="primary" onclick="publishPost()">Publish Post</button>
+    </div>
+  </div>
+</div>
+
+<div id="editModal" class="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet">
+    <div class="sheet-head"><h3 style="margin:0">Edit Profile</h3><button class="close" onclick="closeModal()">✕</button></div>
+    <div class="form">
+      <input id="editName" placeholder="Your name">
+      <textarea id="editBio" rows="3" placeholder="About you"></textarea>
+      <button class="primary" onclick="saveProfile()">Save Profile</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const defaultPosts=[
+ {id:1,name:"PANIKA SETU",initial:"P",time:"Just now",text:"Namaste 🙏 Welcome to PANIKA SETU. Apna Samaj, Apna Setu.",likes:12,liked:false,comments:2},
+ {id:2,name:"Samaj Community",initial:"S",time:"Today",text:"Yahan community members events, help requests aur important updates share kar sakte hain.",likes:8,liked:false,comments:1}
+];
+const members=[
+ {name:"PANIKA SETU",initial:"P"},
+ {name:"Samaj Admin",initial:"A"},
+ {name:"Community Member",initial:"C"},
+ {name:"Samaj Friend",initial:"S"}
+];
+
+let posts=JSON.parse(localStorage.getItem("panikaPosts")||"null")||defaultPosts;
+let profile=JSON.parse(localStorage.getItem("panikaProfile")||"null")||{name:"PANIKA SETU Member",bio:"Apna Samaj, Apna Setu"};
+
+function toast(msg){
+ const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";
+ clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.style.display="none",2200);
+}
+function openPage(page){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ document.getElementById(page+"Page").classList.add("active");
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
+ const b=document.getElementById("nav"+page.charAt(0).toUpperCase()+page.slice(1));
+ if(b)b.classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function openCreate(){document.getElementById("createModal").classList.add("open")}
+function openPost(){closeModal();document.getElementById("postModal").classList.add("open")}
+function openEditProfile(){
+ document.getElementById("editName").value=profile.name;
+ document.getElementById("editBio").value=profile.bio;
+ document.getElementById("editModal").classList.add("open");
+}
+function closeModal(){document.querySelectorAll(".modal").forEach(x=>x.classList.remove("open"))}
+function publishPost(){
+ const text=document.getElementById("postText").value.trim();
+ const image=document.getElementById("postImage").value.trim();
+ if(!text&&!image){toast("Post empty hai");return}
+ posts.unshift({id:Date.now(),name:profile.name,initial:(profile.name[0]||"P").toUpperCase(),time:"Just now",text, image,likes:0,liked:false,comments:0});
+ localStorage.setItem("panikaPosts",JSON.stringify(posts));
+ document.getElementById("postText").value="";document.getElementById("postImage").value="";
+ closeModal();renderFeed();toast("Post published");
+}
+function toggleLike(id){
+ const p=posts.find(x=>x.id===id);if(!p)return;
+ p.liked=!p.liked;p.likes+=(p.liked?1:-1);
+ localStorage.setItem("panikaPosts",JSON.stringify(posts));renderFeed();
+}
+function toggleComments(id){
+ const box=document.getElementById("comments-"+id);
+ if(box)box.style.display=box.style.display==="block"?"none":"block";
+}
+function addComment(id){
+ const input=document.getElementById("comment-"+id);
+ if(!input||!input.value.trim())return;
+ const p=posts.find(x=>x.id===id);if(p)p.comments++;
+ localStorage.setItem("panikaPosts",JSON.stringify(posts));renderFeed();toast("Comment added");
+}
+function renderFeed(){
+ const feed=document.getElementById("feed");
+ feed.innerHTML=posts.map(p=>`
+ <article class="post">
+  <div class="post-head">
+   <div class="avatar">${escapeHtml(p.initial||"P")}</div>
+   <div><div class="post-name">${escapeHtml(p.name)}</div><div class="meta">${escapeHtml(p.time)}</div></div>
+  </div>
+  ${p.text?`<div class="post-text">${escapeHtml(p.text)}</div>`:""}
+  ${p.image?`<img class="post-img" src="${escapeAttr(p.image)}" alt="Community post image" onerror="this.style.display='none'">`:""}
+  <div class="post-actions">
+   <button class="action ${p.liked?"liked":""}" onclick="toggleLike(${p.id})">♥ ${p.likes}</button>
+   <button class="action" onclick="toggleComments(${p.id})">💬 ${p.comments}</button>
+   <button class="action" onclick="navigator.clipboard?.writeText(location.href);toast('Link copied')">↗ Share</button>
+   <button class="action" onclick="toast('Post saved')">🔖</button>
+  </div>
+  <div id="comments-${p.id}" class="comment-box">
+   <input id="comment-${p.id}" placeholder="Write a comment..." onkeydown="if(event.key==='Enter')addComment(${p.id})">
+  </div>
+ </article>`).join("");
+}
+function renderMembers(){
+ const q=(document.getElementById("memberSearch").value||"").toLowerCase();
+ document.getElementById("members").innerHTML=members.filter(m=>m.name.toLowerCase().includes(q)).map(m=>`
+ <div class="member"><div class="avatar">${m.initial}</div><div style="margin-top:8px;font-size:13px;font-weight:700">${escapeHtml(m.name)}</div><button onclick="toast('Profile selected')">View</button></div>
+ `).join("")||'<div class="empty" style="grid-column:1/-1">No members found</div>';
+}
+function saveProfile(){
+ const name=document.getElementById("editName").value.trim()||"PANIKA SETU Member";
+ const bio=document.getElementById("editBio").value.trim();
+ profile={name,bio};localStorage.setItem("panikaProfile",JSON.stringify(profile));
+ closeModal();toast("Profile saved");
+}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(s){return String(s??"").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+renderFeed();renderMembers();
+</script>
+</body>
+</html>
