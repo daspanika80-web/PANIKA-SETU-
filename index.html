@@ -8,379 +8,2864 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:Arial, sans-serif;
-  background:#f4f6f8;
-  color:#222;
-  padding-bottom:75px
+font-family:Arial,sans-serif;
+background:#f4f6f8;
+color:#222;
+padding-bottom:78px
 }
+button{font-family:inherit;cursor:pointer}
 header{
-  background:#fff;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 2px 8px #0001
+background:#fff;
+position:sticky;
+top:0;
+z-index:50;
+box-shadow:0 2px 8px #0001
 }
 .top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 15px
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 15px
 }
 .logo{
-  font-size:21px;
-  font-weight:800;
-  color:#8b2c92
+font-size:21px;
+font-weight:800;
+color:#8b2c92
 }
 .logo small{
-  display:block;
-  font-size:9px;
-  color:#777;
-  letter-spacing:1px
+display:block;
+font-size:9px;
+color:#777;
+letter-spacing:1px;
+margin-top:2px
 }
-.top-icons{
-  display:flex;
-  gap:8px
-}
+.top-icons{display:flex;gap:7px}
 .icon-btn{
-  width:40px;
-  height:40px;
-  border:0;
-  border-radius:50%;
-  background:#f0f1f4;
-  font-size:20px;
-  cursor:pointer
+width:39px;
+height:39px;
+border:0;
+border-radius:50%;
+background:#f0f1f4;
+font-size:19px
 }
 .search{
-  margin:0 15px 12px;
-  background:#f1f2f5;
-  border-radius:22px;
-  padding:11px 15px;
-  color:#777
+margin:0 15px 12px;
+background:#f1f2f5;
+border-radius:22px;
+padding:11px 15px;
+color:#777;
+cursor:pointer
 }
 .container{
-  max-width:650px;
-  margin:auto
+max-width:650px;
+margin:auto
 }
+.page{display:none}
+.page.active{display:block}
 .story-row{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  padding:13px 15px;
-  background:#fff;
-  border-bottom:1px solid #eee
+display:flex;
+gap:12px;
+overflow-x:auto;
+padding:13px 15px;
+background:#fff;
+border-bottom:1px solid #eee
 }
 .story{
-  min-width:68px;
-  text-align:center;
-  font-size:11px
+min-width:68px;
+text-align:center;
+font-size:11px
 }
 .story img{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  border:3px solid #8b2c92;
-  padding:2px;
-  object-fit:cover
+width:55px;
+height:55px;
+border-radius:50%;
+border:3px solid #8b2c92;
+padding:2px;
+object-fit:cover
 }
 .card{
-  background:#fff;
-  margin:10px 0;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 1px 5px #00000010
+background:#fff;
+margin:10px 0;
+padding:15px;
+border-radius:12px;
+box-shadow:0 1px 5px #00000010
+}
+.section-title{
+font-size:18px;
+font-weight:bold;
+margin-bottom:12px
 }
 .profile-head{
-  display:flex;
-  align-items:center;
-  gap:10px
+display:flex;
+align-items:center;
+gap:10px
 }
 .avatar{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#8b2c92;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:21px;
-  font-weight:bold
+width:48px;
+height:48px;
+border-radius:50%;
+background:#8b2c92;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:21px;
+font-weight:bold
 }
 .name{font-weight:bold}
 .verified{color:#1877f2}
 .time{font-size:11px;color:#888}
 .post-text{
-  margin:13px 0;
-  line-height:1.5
+margin:13px 0;
+line-height:1.5
 }
 .post-actions{
-  display:flex;
-  justify-content:space-around;
-  border-top:1px solid #eee;
-  padding-top:10px
+display:flex;
+justify-content:space-around;
+border-top:1px solid #eee;
+padding-top:10px
 }
 .action{
-  border:0;
-  background:none;
-  font-size:14px;
-  color:#555;
-  padding:6px 15px
+border:0;
+background:none;
+font-size:14px;
+color:#555;
+padding:7px 12px
 }
 .action:hover{background:#f2f2f2;border-radius:8px}
 .community{
-  display:flex;
-  gap:8px;
-  overflow-x:auto
+display:flex;
+gap:8px;
+overflow-x:auto
 }
 .community button{
-  white-space:nowrap;
-  border:0;
-  padding:9px 15px;
-  border-radius:20px;
-  background:#eee;
-  color:#444
+white-space:nowrap;
+border:0;
+padding:9px 15px;
+border-radius:20px;
+background:#eee;
+color:#444
 }
 .community .active{
-  background:#8b2c92;
-  color:#fff
+background:#8b2c92;
+color:#fff
 }
 .matrimonial{
-  background:linear-gradient(135deg,#8b2c92,#c94bb2);
-  color:#fff
+background:linear-gradient(135deg,#8b2c92,#c94bb2);
+color:#fff
 }
 .matrimonial button{
-  margin-top:10px;
-  border:0;
-  padding:10px 18px;
-  border-radius:20px;
-  background:#fff;
-  color:#8b2c92;
-  font-weight:bold
+margin-top:10px;
+border:0;
+padding:10px 18px;
+border-radius:20px;
+background:#fff;
+color:#8b2c92;
+font-weight:bold
 }
 .bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:65px;
-  background:#fff;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  box-shadow:0 -2px 10px #0002;
-  z-index:20
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:67px;
+background:#fff;
+display:flex;
+justify-content:space-around;
+align-items:center;
+box-shadow:0 -2px 10px #0002;
+z-index:100
 }
 .nav{
-  border:0;
-  background:none;
-  font-size:11px;
-  color:#666;
-  text-align:center
+border:0;
+background:none;
+font-size:11px;
+color:#666;
+text-align:center;
+min-width:55px
 }
 .nav span{
-  display:block;
-  font-size:22px;
-  margin-bottom:2px
+display:block;
+font-size:22px;
+margin-bottom:2px
 }
-.nav.active{color:#8b2c92}
+.nav.active{color:#8b2c92;font-weight:bold}
 .create{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#8b2c92;
-  color:white;
-  font-size:27px;
-  border:0
+width:48px;
+height:48px;
+border-radius:50%;
+background:#8b2c92;
+color:white;
+font-size:27px;
+border:0;
+box-shadow:0 3px 8px #0003
 }
-.section-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:12px
-}
-.profile-box{
-  text-align:center
-}
+.profile-box{text-align:center}
 .profile-big{
-  width:85px;
-  height:85px;
-  border-radius:50%;
-  background:#8b2c92;
-  color:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin:5px auto 10px;
-  font-size:35px
+width:85px;
+height:85px;
+border-radius:50%;
+background:#8b2c92;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:5px auto 10px;
+font-size:35px
 }
 .menu{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:9px
 }
 .menu button{
-  border:0;
-  background:#f3f3f5;
-  border-radius:10px;
-  padding:12px 5px;
-  font-size:12px
+border:0;
+background:#f3f3f5;
+border-radius:10px;
+padding:14px 5px;
+font-size:13px
 }
+.event{
+border:1px solid #eee;
+border-radius:12px;
+padding:14px;
+margin-bottom:10px
+}
+.event-date{
+display:inline-block;
+background:#8b2c92;
+color:white;
+border-radius:8px;
+padding:7px 10px;
+font-size:12px;
+margin-bottom:8px
+}
+.chat{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px 0;
+border-bottom:1px solid #eee
+}
+.chat-avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:#ddd;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px
+}
+.chat-info{flex:1}
+.chat-name{font-weight:bold}
+.chat-last{font-size:12px;color:#777;margin-top:4px}
+.online{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#25b34b;
+display:inline-block;
+margin-left:4px
+}
+.form-group{margin-bottom:12px}
+.form-group label{
+display:block;
+font-size:13px;
+font-weight:bold;
+margin-bottom:6px
+}
+.form-group input,
+.form-group textarea,
+.form-group select{
+width:100%;
+border:1px solid #ddd;
+border-radius:9px;
+padding:11px;
+font-size:14px;
+outline:none
+}
+.form-group textarea{height:100px;resize:none}
+.primary{
+width:100%;
+border:0;
+background:#8b2c92;
+color:#fff;
+padding:12px;
+border-radius:9px;
+font-weight:bold
+}
+.back{
+border:0;
+background:#f0f0f2;
+padding:9px 14px;
+border-radius:20px;
+margin-bottom:10px
+}
+.empty{
+text-align:center;
+padding:40px 20px;
+color:#777
+}
+.modal-bg{
+display:none;
+position:fixed;
+inset:0;
+background:#0007;
+z-index:200;
+align-items:flex-end;
+justify-content:center
+}
+.modal-bg.show{display:flex}
+.modal{
+background:#fff;
+width:100%;
+max-width:650px;
+border-radius:20px 20px 0 0;
+padding:20px
+}
+.modal h3{margin-bottom:15px}
+.modal-option{
+width:100%;
+border:0;
+background:#f4f4f6;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+text-align:left;
+font-size:14px
+}
+.close{
+width:100%;
+border:0;
+background:#eee;
+padding:11px;
+border-radius:10px;
+margin-top:5px
+}
+.toast{
+position:fixed;
+left:50%;
+bottom:85px;
+transform:translateX(-50%);
+background:#222;
+color:#fff;
+padding:11px 18px;
+border-radius:25px;
+font-size:13px;
+display:none;
+z-index:300
+}
+.toast.show{display:block}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="top">
-    <div class="logo">
-      PANIKA SETU
-      <small>समाज को जोड़ने वाला डिजिटल सेतु</small>
-    </div>
+<div class="top">
+<div class="logo">
+PANIKA SETU
+<small>समाज को जोड़ने वाला डिजिटल सेतु</small>
+</div>
 
-    <div class="top-icons">
-      <button class="icon-btn" onclick="alert('Search')">🔍</button>
-      <button class="icon-btn" onclick="alert('Notifications')">🔔</button>
-      <button class="icon-btn" onclick="showProfile()">👤</button>
-    </div>
-  </div>
+<div class="top-icons">
+<button class="icon-btn" onclick="openSearch()">🔍</button>
+<button class="icon-btn" onclick="showPage('notifications')">🔔</button>
+<button class="icon-btn" onclick="showPage('profile')">👤</button>
+</div>
+</div>
 
-  <div class="search" onclick="alert('Search people, events, groups...')">
-    🔍 लोग, रिश्ते, कार्यक्रम खोजें...
-  </div>
+<div class="search" onclick="openSearch()">
+🔍 लोग, रिश्ते, कार्यक्रम खोजें...
+</div>
 </header>
+
 
 <main class="container">
 
-  <div class="story-row">
-    <div class="story">
-      <img src="https://i.pravatar.cc/100?img=12">
-      <div>आपकी Story</div>
-    </div>
-    <div class="story">
-      <img src="https://i.pravatar.cc/100?img=5">
-      <div>समाज</div>
-    </div>
-    <div class="story">
-      <img src="https://i.pravatar.cc/100?img=8">
-      <div>कार्यक्रम</div>
-    </div>
-    <div class="story">
-      <img src="https://i.pravatar.cc/100?img=11">
-      <div>परिवार</div>
-    </div>
-    <div class="story">
-      <img src="https://i.pravatar.cc/100?img=16">
-      <div>रिश्ते</div>
-    </div>
-  </div>
+<!-- HOME -->
 
-  <div class="card">
-    <div class="section-title">समुदाय चुनें</div>
-    <div class="community">
-      <button class="active">सभी</button>
-      <button>Panika</button>
-      <button>Kabir Panthi</button>
-      <button>Manikpuri</button>
-    </div>
-  </div>
+<section id="home" class="page active">
 
-  <div class="card">
-    <div class="profile-head">
-      <div class="avatar">P</div>
-      <div>
-        <div class="name">PANIKA SETU <span class="verified">✓</span></div>
-        <div class="time">सामुदायिक पोस्ट · अभी</div>
-      </div>
-    </div>
+<div class="story-row">
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=12">
+<div>आपकी Story</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=5">
+<div>समाज</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=8">
+<div>कार्यक्रम</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=11">
+<div>परिवार</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=16">
+<div>रिश्ते</div>
+</div>
+</div>
 
-    <div class="post-text">
-      🙏 PANIKA SETU में आपका स्वागत है।  
-      यह मंच Panika, Kabir Panthi और Manikpuri समाज के लोगों को
-      आपस में जोड़ने, बातचीत करने और सामाजिक संबंध मजबूत करने के लिए बनाया गया है।
-    </div>
+<div class="card">
+<div class="section-title">समुदाय चुनें</div>
 
-    <div class="post-actions">
-      <button class="action">👍 पसंद</button>
-      <button class="action">💬 टिप्पणी</button>
-      <button class="action">↗ साझा</button>
-    </div>
-  </div>
+<div class="community">
+<button class="active" onclick="community(this)">सभी</button>
+<button onclick="community(this)">Panika</button>
+<button onclick="community(this)">Kabir Panthi</button>
+<button onclick="community(this)">Manikpuri</button>
+</div>
+</div>
 
-  <div class="card matrimonial">
-    <div class="section-title">💍 रिश्ते के लिए परिचय</div>
-    <p>
-      लड़का-लड़की के उपयुक्त रिश्ते तलाशें और परिवारों के बीच सम्मानपूर्वक
-      बातचीत शुरू करें।
-    </p>
-    <button onclick="alert('Matrimonial section')">
-      रिश्ते देखें
-    </button>
-  </div>
+<div class="card">
 
-  <div class="card">
-    <div class="section-title">📅 आने वाले कार्यक्रम</div>
+<div class="profile-head">
+<div class="avatar">P</div>
 
-    <p style="margin-bottom:12px">
-      🛕 सामाजिक कार्यक्रम<br>
-      <small>कार्यक्रम की जानकारी यहाँ दिखाई जाएगी।</small>
-    </p>
+<div>
+<div class="name">
+PANIKA SETU <span class="verified">✓</span>
+</div>
 
-    <button class="action">सभी Events देखें →</button>
-  </div>
+<div class="time">सामुदायिक पोस्ट · अभी</div>
+</div>
+</div>
 
-  <div class="card">
-    <div class="section-title">👥 PANIKA SETU में लोग</div>
+<div class="post-text">
+🙏 PANIKA SETU में आपका स्वागत है।  
+यह मंच Panika, Kabir Panthi और Manikpuri समाज के लोगों को
+आपस में जोड़ने, बातचीत करने और सामाजिक संबंध मजबूत करने के लिए बनाया गया है।
+</div>
 
-    <div class="menu">
-      <button>👨 सदस्य</button>
-      <button>👩 सदस्य</button>
-      <button>🟢 Online</button>
-      <button>🛡️ Verified</button>
-      <button>💍 रिश्ते</button>
-      <button>👨‍👩‍👧 परिवार</button>
-    </div>
-  </div>
+<div class="post-actions">
+<button class="action" onclick="likePost(this)">👍 पसंद</button>
+<button class="action" onclick="commentPost()">💬 टिप्पणी</button>
+<button class="action" onclick="sharePost()">↗ साझा</button>
+</div>
+
+</div>
+
+
+<div class="card matrimonial">
+
+<div class="section-title">💍 रिश्ते के लिए परिचय</div>
+
+<p>
+लड़का-लड़की के उपयुक्त रिश्ते तलाशें और परिवारों के बीच
+सम्मानपूर्वक बातचीत शुरू करें।
+</p>
+
+<button onclick="showPage('matrimonial')">
+रिश्ते देखें
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">📅 आने वाले कार्यक्रम</div>
+
+<p style="margin-bottom:12px">
+🛕 सामाजिक कार्यक्रम<br>
+<small>समाज के कार्यक्रम और आयोजन यहाँ दिखाई देंगे।</small>
+</p>
+
+<button class="action" onclick="showPage('events')">
+सभी Events देखें →
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">👥 PANIKA SETU में लोग</div>
+
+<div class="menu">
+
+<button onclick="showToast('सदस्य सूची जल्द उपलब्ध होगी')">👨 सदस्य</button>
+<button onclick="showToast('सदस्य सूची जल्द उपलब्ध होगी')">👩 सदस्य</button>
+<button onclick="showToast('Online सदस्य जल्द दिखाई देंगे')">🟢 Online</button>
+<button onclick="showToast('Verified सदस्य जल्द दिखाई देंगे')">🛡️ Verified</button>
+<button onclick="showPage('matrimonial')">💍 रिश्ते</button>
+<button onclick="showToast('Family section जल्द उपलब्ध होगा')">👨‍👩‍👧 परिवार</button>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section id="events" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">📅 समाज के कार्यक्रम</div>
+
+<div class="event">
+<div class="event-date">आने वाला कार्यक्रम</div>
+<h3>🛕 सामाजिक मिलन समारोह</h3>
+<p style="margin-top:7px;color:#666;font-size:13px">
+समाज के सभी सदस्यों के लिए सामुदायिक कार्यक्रम।
+</p>
+<br>
+<button class="primary" onclick="showToast('कार्यक्रम में रुचि दर्ज हो गई')">
+मैं शामिल होऊँगा
+</button>
+</div>
+
+<div class="event">
+<div class="event-date">कार्यक्रम</div>
+<h3>🙏 समाज बैठक</h3>
+<p style="margin-top:7px;color:#666;font-size:13px">
+समाज से जुड़े महत्वपूर्ण विषयों पर चर्चा।
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CHAT -->
+
+<section id="chat" class="page">
+
+<div class="card">
+
+<div class="section-title">💬 Chat</div>
+
+<div class="chat" onclick="openChat('समाज सदस्य')">
+<div class="chat-avatar">👨</div>
+<div class="chat-info">
+<div class="chat-name">समाज सदस्य <span class="online"></span></div>
+<div class="chat-last">Online</div>
+</div>
+</div>
+
+<div class="chat" onclick="openChat('PANIKA SETU')">
+<div class="chat-avatar">P</div>
+<div class="chat-info">
+<div class="chat-name">PANIKA SETU</div>
+<div class="chat-last">Community support</div>
+</div>
+</div>
+
+<div class="empty">
+💬<br><br>
+यहाँ आपकी conversations दिखाई देंगी।
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="card profile-box">
+
+<div class="profile-big">P</div>
+
+<h2>आपकी Profile</h2>
+
+<p style="color:#777;margin:7px 0 15px">
+PANIKA SETU सदस्य
+</p>
+
+<button class="primary" onclick="editProfile()">
+✏️ Profile Edit करें
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">⚙️ Profile Settings</div>
+
+<div class="menu">
+
+<button onclick="showToast('Profile Photo option')">📷 Photo</button>
+<button onclick="showToast('Basic Details')">📝 Details</button>
+<button onclick="showToast('Privacy Settings')">🔒 Privacy</button>
+<button onclick="showToast('Verification')">🛡️ Verification</button>
+<button onclick="showToast('Blocked Users')">🚫 Blocked</button>
+<button onclick="showToast('Support')">🆘 Support</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CREATE -->
+
+<section id="create" class="page">
+
+<div class="card">
+
+<div class="section-title">➕ Create</div>
+
+<button class="modal-option" onclick="createType('post')">
+📝 Create Post
+</button>
+
+<button class="modal-option" onclick="createType('story')">
+⭕ Create Story
+</button>
+
+<button class="modal-option" onclick="createType('event')">
+📅 Create Event
+</button>
+
+<button class="modal-option" onclick="createType('matrimonial')">
+💍 Matrimonial Profile
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section id="search" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">🔎 Search</div>
+
+<div class="form-group">
+<input id="searchInput"
+type="text"
+placeholder="लोग, कार्यक्रम, रिश्ते खोजें..."
+oninput="doSearch()">
+</div>
+
+<div id="searchResult" class="empty">
+कुछ खोजने के लिए ऊपर लिखें।
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">🔔 Notifications</div>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PANIKA SETU</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f8;
+color:#222;
+padding-bottom:78px
+}
+button{font-family:inherit;cursor:pointer}
+header{
+background:#fff;
+position:sticky;
+top:0;
+z-index:50;
+box-shadow:0 2px 8px #0001
+}
+.top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 15px
+}
+.logo{
+font-size:21px;
+font-weight:800;
+color:#8b2c92
+}
+.logo small{
+display:block;
+font-size:9px;
+color:#777;
+letter-spacing:1px;
+margin-top:2px
+}
+.top-icons{display:flex;gap:7px}
+.icon-btn{
+width:39px;
+height:39px;
+border:0;
+border-radius:50%;
+background:#f0f1f4;
+font-size:19px
+}
+.search{
+margin:0 15px 12px;
+background:#f1f2f5;
+border-radius:22px;
+padding:11px 15px;
+color:#777;
+cursor:pointer
+}
+.container{
+max-width:650px;
+margin:auto
+}
+.page{display:none}
+.page.active{display:block}
+.story-row{
+display:flex;
+gap:12px;
+overflow-x:auto;
+padding:13px 15px;
+background:#fff;
+border-bottom:1px solid #eee
+}
+.story{
+min-width:68px;
+text-align:center;
+font-size:11px
+}
+.story img{
+width:55px;
+height:55px;
+border-radius:50%;
+border:3px solid #8b2c92;
+padding:2px;
+object-fit:cover
+}
+.card{
+background:#fff;
+margin:10px 0;
+padding:15px;
+border-radius:12px;
+box-shadow:0 1px 5px #00000010
+}
+.section-title{
+font-size:18px;
+font-weight:bold;
+margin-bottom:12px
+}
+.profile-head{
+display:flex;
+align-items:center;
+gap:10px
+}
+.avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:#8b2c92;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:21px;
+font-weight:bold
+}
+.name{font-weight:bold}
+.verified{color:#1877f2}
+.time{font-size:11px;color:#888}
+.post-text{
+margin:13px 0;
+line-height:1.5
+}
+.post-actions{
+display:flex;
+justify-content:space-around;
+border-top:1px solid #eee;
+padding-top:10px
+}
+.action{
+border:0;
+background:none;
+font-size:14px;
+color:#555;
+padding:7px 12px
+}
+.action:hover{background:#f2f2f2;border-radius:8px}
+.community{
+display:flex;
+gap:8px;
+overflow-x:auto
+}
+.community button{
+white-space:nowrap;
+border:0;
+padding:9px 15px;
+border-radius:20px;
+background:#eee;
+color:#444
+}
+.community .active{
+background:#8b2c92;
+color:#fff
+}
+.matrimonial{
+background:linear-gradient(135deg,#8b2c92,#c94bb2);
+color:#fff
+}
+.matrimonial button{
+margin-top:10px;
+border:0;
+padding:10px 18px;
+border-radius:20px;
+background:#fff;
+color:#8b2c92;
+font-weight:bold
+}
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:67px;
+background:#fff;
+display:flex;
+justify-content:space-around;
+align-items:center;
+box-shadow:0 -2px 10px #0002;
+z-index:100
+}
+.nav{
+border:0;
+background:none;
+font-size:11px;
+color:#666;
+text-align:center;
+min-width:55px
+}
+.nav span{
+display:block;
+font-size:22px;
+margin-bottom:2px
+}
+.nav.active{color:#8b2c92;font-weight:bold}
+.create{
+width:48px;
+height:48px;
+border-radius:50%;
+background:#8b2c92;
+color:white;
+font-size:27px;
+border:0;
+box-shadow:0 3px 8px #0003
+}
+.profile-box{text-align:center}
+.profile-big{
+width:85px;
+height:85px;
+border-radius:50%;
+background:#8b2c92;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:5px auto 10px;
+font-size:35px
+}
+.menu{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:9px
+}
+.menu button{
+border:0;
+background:#f3f3f5;
+border-radius:10px;
+padding:14px 5px;
+font-size:13px
+}
+.event{
+border:1px solid #eee;
+border-radius:12px;
+padding:14px;
+margin-bottom:10px
+}
+.event-date{
+display:inline-block;
+background:#8b2c92;
+color:white;
+border-radius:8px;
+padding:7px 10px;
+font-size:12px;
+margin-bottom:8px
+}
+.chat{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px 0;
+border-bottom:1px solid #eee
+}
+.chat-avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:#ddd;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px
+}
+.chat-info{flex:1}
+.chat-name{font-weight:bold}
+.chat-last{font-size:12px;color:#777;margin-top:4px}
+.online{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#25b34b;
+display:inline-block;
+margin-left:4px
+}
+.form-group{margin-bottom:12px}
+.form-group label{
+display:block;
+font-size:13px;
+font-weight:bold;
+margin-bottom:6px
+}
+.form-group input,
+.form-group textarea,
+.form-group select{
+width:100%;
+border:1px solid #ddd;
+border-radius:9px;
+padding:11px;
+font-size:14px;
+outline:none
+}
+.form-group textarea{height:100px;resize:none}
+.primary{
+width:100%;
+border:0;
+background:#8b2c92;
+color:#fff;
+padding:12px;
+border-radius:9px;
+font-weight:bold
+}
+.back{
+border:0;
+background:#f0f0f2;
+padding:9px 14px;
+border-radius:20px;
+margin-bottom:10px
+}
+.empty{
+text-align:center;
+padding:40px 20px;
+color:#777
+}
+.modal-bg{
+display:none;
+position:fixed;
+inset:0;
+background:#0007;
+z-index:200;
+align-items:flex-end;
+justify-content:center
+}
+.modal-bg.show{display:flex}
+.modal{
+background:#fff;
+width:100%;
+max-width:650px;
+border-radius:20px 20px 0 0;
+padding:20px
+}
+.modal h3{margin-bottom:15px}
+.modal-option{
+width:100%;
+border:0;
+background:#f4f4f6;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+text-align:left;
+font-size:14px
+}
+.close{
+width:100%;
+border:0;
+background:#eee;
+padding:11px;
+border-radius:10px;
+margin-top:5px
+}
+.toast{
+position:fixed;
+left:50%;
+bottom:85px;
+transform:translateX(-50%);
+background:#222;
+color:#fff;
+padding:11px 18px;
+border-radius:25px;
+font-size:13px;
+display:none;
+z-index:300
+}
+.toast.show{display:block}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="top">
+<div class="logo">
+PANIKA SETU
+<small>समाज को जोड़ने वाला डिजिटल सेतु</small>
+</div>
+
+<div class="top-icons">
+<button class="icon-btn" onclick="openSearch()">🔍</button>
+<button class="icon-btn" onclick="showPage('notifications')">🔔</button>
+<button class="icon-btn" onclick="showPage('profile')">👤</button>
+</div>
+</div>
+
+<div class="search" onclick="openSearch()">
+🔍 लोग, रिश्ते, कार्यक्रम खोजें...
+</div>
+</header>
+
+
+<main class="container">
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="story-row">
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=12">
+<div>आपकी Story</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=5">
+<div>समाज</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=8">
+<div>कार्यक्रम</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=11">
+<div>परिवार</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=16">
+<div>रिश्ते</div>
+</div>
+</div>
+
+<div class="card">
+<div class="section-title">समुदाय चुनें</div>
+
+<div class="community">
+<button class="active" onclick="community(this)">सभी</button>
+<button onclick="community(this)">Panika</button>
+<button onclick="community(this)">Kabir Panthi</button>
+<button onclick="community(this)">Manikpuri</button>
+</div>
+</div>
+
+<div class="card">
+
+<div class="profile-head">
+<div class="avatar">P</div>
+
+<div>
+<div class="name">
+PANIKA SETU <span class="verified">✓</span>
+</div>
+
+<div class="time">सामुदायिक पोस्ट · अभी</div>
+</div>
+</div>
+
+<div class="post-text">
+🙏 PANIKA SETU में आपका स्वागत है।  
+यह मंच Panika, Kabir Panthi और Manikpuri समाज के लोगों को
+आपस में जोड़ने, बातचीत करने और सामाजिक संबंध मजबूत करने के लिए बनाया गया है।
+</div>
+
+<div class="post-actions">
+<button class="action" onclick="likePost(this)">👍 पसंद</button>
+<button class="action" onclick="commentPost()">💬 टिप्पणी</button>
+<button class="action" onclick="sharePost()">↗ साझा</button>
+</div>
+
+</div>
+
+
+<div class="card matrimonial">
+
+<div class="section-title">💍 रिश्ते के लिए परिचय</div>
+
+<p>
+लड़का-लड़की के उपयुक्त रिश्ते तलाशें और परिवारों के बीच
+सम्मानपूर्वक बातचीत शुरू करें।
+</p>
+
+<button onclick="showPage('matrimonial')">
+रिश्ते देखें
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">📅 आने वाले कार्यक्रम</div>
+
+<p style="margin-bottom:12px">
+🛕 सामाजिक कार्यक्रम<br>
+<small>समाज के कार्यक्रम और आयोजन यहाँ दिखाई देंगे।</small>
+</p>
+
+<button class="action" onclick="showPage('events')">
+सभी Events देखें →
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">👥 PANIKA SETU में लोग</div>
+
+<div class="menu">
+
+<button onclick="showToast('सदस्य सूची जल्द उपलब्ध होगी')">👨 सदस्य</button>
+<button onclick="showToast('सदस्य सूची जल्द उपलब्ध होगी')">👩 सदस्य</button>
+<button onclick="showToast('Online सदस्य जल्द दिखाई देंगे')">🟢 Online</button>
+<button onclick="showToast('Verified सदस्य जल्द दिखाई देंगे')">🛡️ Verified</button>
+<button onclick="showPage('matrimonial')">💍 रिश्ते</button>
+<button onclick="showToast('Family section जल्द उपलब्ध होगा')">👨‍👩‍👧 परिवार</button>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section id="events" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">📅 समाज के कार्यक्रम</div>
+
+<div class="event">
+<div class="event-date">आने वाला कार्यक्रम</div>
+<h3>🛕 सामाजिक मिलन समारोह</h3>
+<p style="margin-top:7px;color:#666;font-size:13px">
+समाज के सभी सदस्यों के लिए सामुदायिक कार्यक्रम।
+</p>
+<br>
+<button class="primary" onclick="showToast('कार्यक्रम में रुचि दर्ज हो गई')">
+मैं शामिल होऊँगा
+</button>
+</div>
+
+<div class="event">
+<div class="event-date">कार्यक्रम</div>
+<h3>🙏 समाज बैठक</h3>
+<p style="margin-top:7px;color:#666;font-size:13px">
+समाज से जुड़े महत्वपूर्ण विषयों पर चर्चा।
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CHAT -->
+
+<section id="chat" class="page">
+
+<div class="card">
+
+<div class="section-title">💬 Chat</div>
+
+<div class="chat" onclick="openChat('समाज सदस्य')">
+<div class="chat-avatar">👨</div>
+<div class="chat-info">
+<div class="chat-name">समाज सदस्य <span class="online"></span></div>
+<div class="chat-last">Online</div>
+</div>
+</div>
+
+<div class="chat" onclick="openChat('PANIKA SETU')">
+<div class="chat-avatar">P</div>
+<div class="chat-info">
+<div class="chat-name">PANIKA SETU</div>
+<div class="chat-last">Community support</div>
+</div>
+</div>
+
+<div class="empty">
+💬<br><br>
+यहाँ आपकी conversations दिखाई देंगी।
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="card profile-box">
+
+<div class="profile-big">P</div>
+
+<h2>आपकी Profile</h2>
+
+<p style="color:#777;margin:7px 0 15px">
+PANIKA SETU सदस्य
+</p>
+
+<button class="primary" onclick="editProfile()">
+✏️ Profile Edit करें
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">⚙️ Profile Settings</div>
+
+<div class="menu">
+
+<button onclick="showToast('Profile Photo option')">📷 Photo</button>
+<button onclick="showToast('Basic Details')">📝 Details</button>
+<button onclick="showToast('Privacy Settings')">🔒 Privacy</button>
+<button onclick="showToast('Verification')">🛡️ Verification</button>
+<button onclick="showToast('Blocked Users')">🚫 Blocked</button>
+<button onclick="showToast('Support')">🆘 Support</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CREATE -->
+
+<section id="create" class="page">
+
+<div class="card">
+
+<div class="section-title">➕ Create</div>
+
+<button class="modal-option" onclick="createType('post')">
+📝 Create Post
+</button>
+
+<button class="modal-option" onclick="createType('story')">
+⭕ Create Story
+</button>
+
+<button class="modal-option" onclick="createType('event')">
+📅 Create Event
+</button>
+
+<button class="modal-option" onclick="createType('matrimonial')">
+💍 Matrimonial Profile
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section id="search" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">🔎 Search</div>
+
+<div class="form-group">
+<input id="searchInput"
+type="text"
+placeholder="लोग, कार्यक्रम, रिश्ते खोजें..."
+oninput="doSearch()">
+</div>
+
+<div id="searchResult" class="empty">
+कुछ खोजने के लिए ऊपर लिखें।
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">🔔 Notifications</div>
+
+<div class="chat">
+<div class="chat-avatar">👍</div>
+<div class="chat-info">
+<div class="chat-name">PANIKA SETU</div>
+<div class="chat-last">आपका स्वागत है।</div>
+</div>
+</div>
+
+<div class="chat">
+<div class="chat-avatar">📅</div>
+<div class="chat-info">
+<div class="chat-name">नया कार्यक्रम</div>
+<div class="chat-last">समाज का नया कार्यक्रम उपलब्ध है।</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MATRIMONIAL -->
+
+<section id="matrimonial" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">💍 Matrimonial</div>
+
+<p style="color:#666;margin-bottom:15px">
+सम्मानपूर्वक और परिवार की सहमति से रिश्ते तलाशें।
+</p>
+
+<div class="menu">
+<button onclick="showToast('लड़के profiles जल्द उपलब्ध होंगे')">👨 लड़के</button>
+<button onclick="showToast('लड़की profiles जल्द उपलब्ध होंगे')">👩 लड़कियाँ</button>
+<button onclick="showToast('Guardian option')">👨‍👩‍👧 Guardian</button>
+<button onclick="showToast('आपकी matrimonial profile')">💍 मेरी Profile</button>
+</div>
+
+</div>
+
+</section>
 
 </main>
 
+
+<!-- BOTTOM NAVIGATION -->
+
 <nav class="bottom">
 
-  <button class="nav active" onclick="home()">
-    <span>🏠</span>
-    Home
-  </button>
+<button id="nav-home" class="nav active" onclick="showPage('home')">
+<span>🏠</span>
+Home
+</button>
 
-  <button class="nav" onclick="alert('Events')">
-    <span>📅</span>
-    Events
-  </button>
+<button id="nav-events" class="nav" onclick="showPage('events')">
+<span>📅</span>
+Events
+</button>
 
-  <button class="create" onclick="createPost()">+</button>
+<button class="create" onclick="openCreate()">
++
+</button>
 
-  <button class="nav" onclick="alert('Chat')">
-    <span>💬</span>
-    Chat
-  </button>
+<button id="nav-chat" class="nav" onclick="showPage('chat')">
+<span>💬</span>
+Chat
+</button>
 
-  <button class="nav" onclick="showProfile()">
-    <span>👤</span>
-    Profile
-  </button>
+<button id="nav-profile" class="nav" onclick="showPage('profile')">
+<span>👤</span>
+Profile
+</button>
 
 </nav>
 
+
+<!-- CREATE MODAL -->
+
+<div id="createModal" class="modal-bg" onclick="closeModal(event)">
+
+<div class="modal">
+
+<h3>➕ Create</h3>
+
+<button class="modal-option" onclick="createType('post')">
+📝 Post बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('story')">
+⭕ Story बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('event')">
+📅 Event बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('matrimonial')">
+💍 Matrimonial Profile बनाएं
+</button>
+
+<button class="close" onclick="closeCreate()">
+बंद करें
+</button>
+
+</div>
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+
 <script>
-function createPost(){
-  alert("Create Post / Story / Event / Matrimonial Profile");
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(function(section){
+section.classList.remove("active");
+});
+
+var target=document.getElementById(page);
+
+if(target){
+target.classList.add("active");
 }
+
+document.querySelectorAll(".nav").forEach(function(btn){
+btn.classList.remove("active");
+});
+
+if(page==="home"){
+document.getElementById("nav-home").classList.add("active");
+}
+
+if(page==="events"){
+document.getElementById("nav-events").classList.add("active");
+}
+
+if(page==="chat"){
+document.getElementById("nav-chat").classList.add("active");
+}
+
+if(page==="profile"){
+document.getElementById("nav-profile").classList.add("active");
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+}
+
+
+function openCreate(){
+document.getElementById("createModal").classList.add("show");
+}
+
+
+function closeCreate(){
+document.getElementById("createModal").classList.remove("show");
+}
+
+
+function closeModal(e){
+if(e.target.id==="createModal"){
+closeCreate();
+}
+}
+
+
+function createType(type){
+
+closeCreate();
+
+if(type==="post"){
+showPage("create");
+showToast("Post बनाने का option खुल गया");
+}
+
+if(type==="story"){
+showPage("create");
+showToast("Story बनाने का option खुल गया");
+}
+
+if(type==="event"){
+showPage("events");
+showToast("Event section खुल गया");
+}
+
+if(type==="matrimonial"){
+showPage("matrimonial");
+showToast("Matrimonial section खुल गया");
+}
+
+}
+
 
 function showProfile(){
-  alert("Profile section");
+showPage("profile");
 }
 
-function home(){
-  window.scrollTo({top:0,behavior:"smooth"});
+
+function openSearch(){
+showPage("search");
+
+setTimeout(function(){
+var input=document.getElementById("searchInput");
+if(input) input.focus();
+},300);
 }
+
+
+function doSearch(){
+
+var value=document.getElementById("searchInput").value.trim();
+var result=document.getElementById("searchResult");
+
+if(value===""){
+result.innerHTML="कुछ खोजने के लिए ऊपर लिखें।";
+return;
+}
+
+result.innerHTML=
+"🔎 <b>"+value+"</b> के लिए खोज चल रही है...<br><br>"+
+"Search results यहाँ दिखाई देंगे।";
+}
+
+
+function community(button){
+
+document.querySelectorAll(".community button").forEach(function(btn){
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+showToast(button.innerText+" community चुना गया");
+}
+
+
+function likePost(button){
+
+if(button.dataset.liked==="yes"){
+button.innerHTML="👍 पसंद";
+button.dataset.liked="no";
+}else{
+button.innerHTML="👍 पसंद ✓";
+button.dataset.liked="yes";
+}
+
+}
+
+
+function commentPost(){
+
+showToast("Comment feature जल्द Firebase से जुड़ेगा");
+
+}
+
+
+function sharePost(){
+
+if(navigator.share){
+
+navigator.share({
+title:"PANIKA SETU",
+text:"PANIKA SETU — समाज को जोड़ने वाला डिजिटल सेतु"
+});
+
+}else{
+
+showToast("Share option आपके device पर उपलब्ध नहीं है");
+
+}
+
+}
+
+
+function openChat(name){
+
+showToast(name+" chat जल्द उपलब्ध होगी");
+
+}
+
+
+function editProfile(){
+
+showToast("Profile editing जल्द database से जुड़ेगा");
+
+}
+
+
+function showToast(message){
+
+var toast=document.getElementById("toast");
+
+toast.innerText=message;
+toast.classList.add("show");
+
+setTimeout(function(){
+toast.classList.remove("show");
+},2200);
+
+}
+
+
+</script>
+
+</body>
+</html>￼Enter<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PANIKA SETU</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f8;
+color:#222;
+padding-bottom:78px
+}
+button{font-family:inherit;cursor:pointer}
+header{
+background:#fff;
+position:sticky;
+top:0;
+z-index:50;
+box-shadow:0 2px 8px #0001
+}
+.top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 15px
+}
+.logo{
+font-size:21px;
+font-weight:800;
+color:#8b2c92
+}
+.logo small{
+display:block;
+font-size:9px;
+color:#777;
+letter-spacing:1px;
+margin-top:2px
+}
+.top-icons{display:flex;gap:7px}
+.icon-btn{
+width:39px;
+height:39px;
+border:0;
+border-radius:50%;
+background:#f0f1f4;
+font-size:19px
+}
+.search{
+margin:0 15px 12px;
+background:#f1f2f5;
+border-radius:22px;
+padding:11px 15px;
+color:#777;
+cursor:pointer
+}
+.container{
+max-width:650px;
+margin:auto
+}
+.page{display:none}
+.page.active{display:block}
+.story-row{
+display:flex;
+gap:12px;
+overflow-x:auto;
+padding:13px 15px;
+background:#fff;
+border-bottom:1px solid #eee
+}
+.story{
+min-width:68px;
+text-align:center;
+font-size:11px
+}
+.story img{
+width:55px;
+height:55px;
+border-radius:50%;
+border:3px solid #8b2c92;
+padding:2px;
+object-fit:cover
+}
+.card{
+background:#fff;
+margin:10px 0;
+padding:15px;
+border-radius:12px;
+box-shadow:0 1px 5px #00000010
+}
+.section-title{
+font-size:18px;
+font-weight:bold;
+margin-bottom:12px
+}
+.profile-head{
+display:flex;
+align-items:center;
+gap:10px
+}
+.avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:#8b2c92;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:21px;
+font-weight:bold
+}
+.name{font-weight:bold}
+.verified{color:#1877f2}
+.time{font-size:11px;color:#888}
+.post-text{
+margin:13px 0;
+line-height:1.5
+}
+.post-actions{
+display:flex;
+justify-content:space-around;
+border-top:1px solid #eee;
+padding-top:10px
+}
+.action{
+border:0;
+background:none;
+font-size:14px;
+color:#555;
+padding:7px 12px
+}
+.action:hover{background:#f2f2f2;border-radius:8px}
+.community{
+display:flex;
+gap:8px;
+overflow-x:auto
+}
+.community button{
+white-space:nowrap;
+border:0;
+padding:9px 15px;
+border-radius:20px;
+background:#eee;
+color:#444
+}
+.community .active{
+background:#8b2c92;
+color:#fff
+}
+.matrimonial{
+background:linear-gradient(135deg,#8b2c92,#c94bb2);
+color:#fff
+}
+.matrimonial button{
+margin-top:10px;
+border:0;
+padding:10px 18px;
+border-radius:20px;
+background:#fff;
+color:#8b2c92;
+font-weight:bold
+}
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:67px;
+background:#fff;
+display:flex;
+justify-content:space-around;
+align-items:center;
+box-shadow:0 -2px 10px #0002;
+z-index:100
+}
+.nav{
+border:0;
+background:none;
+font-size:11px;
+color:#666;
+text-align:center;
+min-width:55px
+}
+.nav span{
+display:block;
+font-size:22px;
+margin-bottom:2px
+}
+.nav.active{color:#8b2c92;font-weight:bold}
+.create{
+width:48px;
+height:48px;
+border-radius:50%;
+background:#8b2c92;
+color:white;
+font-size:27px;
+border:0;
+box-shadow:0 3px 8px #0003
+}
+.profile-box{text-align:center}
+.profile-big{
+width:85px;
+height:85px;
+border-radius:50%;
+background:#8b2c92;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:5px auto 10px;
+font-size:35px
+}
+.menu{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:9px
+}
+.menu button{
+border:0;
+background:#f3f3f5;
+border-radius:10px;
+padding:14px 5px;
+font-size:13px
+}
+.event{
+border:1px solid #eee;
+border-radius:12px;
+padding:14px;
+margin-bottom:10px
+}
+.event-date{
+display:inline-block;
+background:#8b2c92;
+color:white;
+border-radius:8px;
+padding:7px 10px;
+font-size:12px;
+margin-bottom:8px
+}
+.chat{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px 0;
+border-bottom:1px solid #eee
+}
+.chat-avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:#ddd;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px
+}
+.chat-info{flex:1}
+.chat-name{font-weight:bold}
+.chat-last{font-size:12px;color:#777;margin-top:4px}
+.online{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#25b34b;
+display:inline-block;
+margin-left:4px
+}
+.form-group{margin-bottom:12px}
+.form-group label{
+display:block;
+font-size:13px;
+font-weight:bold;
+margin-bottom:6px
+}
+.form-group input,
+.form-group textarea,
+.form-group select{
+width:100%;
+border:1px solid #ddd;
+border-radius:9px;
+padding:11px;
+font-size:14px;
+outline:none
+}
+.form-group textarea{height:100px;resize:none}
+.primary{
+width:100%;
+border:0;
+background:#8b2c92;
+color:#fff;
+padding:12px;
+border-radius:9px;
+font-weight:bold
+}
+.back{
+border:0;
+background:#f0f0f2;
+padding:9px 14px;
+border-radius:20px;
+margin-bottom:10px
+}
+.empty{
+text-align:center;
+padding:40px 20px;
+color:#777
+}
+.modal-bg{
+display:none;
+position:fixed;
+inset:0;
+background:#0007;
+z-index:200;
+align-items:flex-end;
+justify-content:center
+}
+.modal-bg.show{display:flex}
+.modal{
+background:#fff;
+width:100%;
+max-width:650px;
+border-radius:20px 20px 0 0;
+padding:20px
+}
+.modal h3{margin-bottom:15px}
+.modal-option{
+width:100%;
+border:0;
+background:#f4f4f6;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+text-align:left;
+font-size:14px
+}
+.close{
+width:100%;
+border:0;
+background:#eee;
+padding:11px;
+border-radius:10px;
+margin-top:5px
+}
+.toast{
+position:fixed;
+left:50%;
+bottom:85px;
+transform:translateX(-50%);
+background:#222;
+color:#fff;
+padding:11px 18px;
+border-radius:25px;
+font-size:13px;
+display:none;
+z-index:300
+}
+.toast.show{display:block}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="top">
+<div class="logo">
+PANIKA SETU
+<small>समाज को जोड़ने वाला डिजिटल सेतु</small>
+</div>
+
+<div class="top-icons">
+<button class="icon-btn" onclick="openSearch()">🔍</button>
+<button class="icon-btn" onclick="showPage('notifications')">🔔</button>
+<button class="icon-btn" onclick="showPage('profile')">👤</button>
+</div>
+</div>
+
+<div class="search" onclick="openSearch()">
+🔍 लोग, रिश्ते, कार्यक्रम खोजें...
+</div>
+</header>
+
+
+<main class="container">
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="story-row">
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=12">
+<div>आपकी Story</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=5">
+<div>समाज</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=8">
+<div>कार्यक्रम</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=11">
+<div>परिवार</div>
+</div>
+<div class="story">
+<img src="https://i.pravatar.cc/100?img=16">
+<div>रिश्ते</div>
+</div>
+</div>
+
+<div class="card">
+<div class="section-title">समुदाय चुनें</div>
+
+<div class="community">
+<button class="active" onclick="community(this)">सभी</button>
+<button onclick="community(this)">Panika</button>
+<button onclick="community(this)">Kabir Panthi</button>
+<button onclick="community(this)">Manikpuri</button>
+</div>
+</div>
+
+<div class="card">
+
+<div class="profile-head">
+<div class="avatar">P</div>
+
+<div>
+<div class="name">
+PANIKA SETU <span class="verified">✓</span>
+</div>
+
+<div class="time">सामुदायिक पोस्ट · अभी</div>
+</div>
+</div>
+
+<div class="post-text">
+🙏 PANIKA SETU में आपका स्वागत है।  
+यह मंच Panika, Kabir Panthi और Manikpuri समाज के लोगों को
+आपस में जोड़ने, बातचीत करने और सामाजिक संबंध मजबूत करने के लिए बनाया गया है।
+</div>
+
+<div class="post-actions">
+<button class="action" onclick="likePost(this)">👍 पसंद</button>
+<button class="action" onclick="commentPost()">💬 टिप्पणी</button>
+<button class="action" onclick="sharePost()">↗ साझा</button>
+</div>
+
+</div>
+
+
+<div class="card matrimonial">
+
+<div class="section-title">💍 रिश्ते के लिए परिचय</div>
+
+<p>
+लड़का-लड़की के उपयुक्त रिश्ते तलाशें और परिवारों के बीच
+सम्मानपूर्वक बातचीत शुरू करें।
+</p>
+
+<button onclick="showPage('matrimonial')">
+रिश्ते देखें
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">📅 आने वाले कार्यक्रम</div>
+
+<p style="margin-bottom:12px">
+🛕 सामाजिक कार्यक्रम<br>
+<small>समाज के कार्यक्रम और आयोजन यहाँ दिखाई देंगे।</small>
+</p>
+
+<button class="action" onclick="showPage('events')">
+सभी Events देखें →
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">👥 PANIKA SETU में लोग</div>
+
+<div class="menu">
+
+<button onclick="showToast('सदस्य सूची जल्द उपलब्ध होगी')">👨 सदस्य</button>
+<button onclick="showToast('सदस्य सूची जल्द उपलब्ध होगी')">👩 सदस्य</button>
+<button onclick="showToast('Online सदस्य जल्द दिखाई देंगे')">🟢 Online</button>
+<button onclick="showToast('Verified सदस्य जल्द दिखाई देंगे')">🛡️ Verified</button>
+<button onclick="showPage('matrimonial')">💍 रिश्ते</button>
+<button onclick="showToast('Family section जल्द उपलब्ध होगा')">👨‍👩‍👧 परिवार</button>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section id="events" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">📅 समाज के कार्यक्रम</div>
+
+<div class="event">
+<div class="event-date">आने वाला कार्यक्रम</div>
+<h3>🛕 सामाजिक मिलन समारोह</h3>
+<p style="margin-top:7px;color:#666;font-size:13px">
+समाज के सभी सदस्यों के लिए सामुदायिक कार्यक्रम।
+</p>
+<br>
+<button class="primary" onclick="showToast('कार्यक्रम में रुचि दर्ज हो गई')">
+मैं शामिल होऊँगा
+</button>
+</div>
+
+<div class="event">
+<div class="event-date">कार्यक्रम</div>
+<h3>🙏 समाज बैठक</h3>
+<p style="margin-top:7px;color:#666;font-size:13px">
+समाज से जुड़े महत्वपूर्ण विषयों पर चर्चा।
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CHAT -->
+
+<section id="chat" class="page">
+
+<div class="card">
+
+<div class="section-title">💬 Chat</div>
+
+<div class="chat" onclick="openChat('समाज सदस्य')">
+<div class="chat-avatar">👨</div>
+<div class="chat-info">
+<div class="chat-name">समाज सदस्य <span class="online"></span></div>
+<div class="chat-last">Online</div>
+</div>
+</div>
+
+<div class="chat" onclick="openChat('PANIKA SETU')">
+<div class="chat-avatar">P</div>
+<div class="chat-info">
+<div class="chat-name">PANIKA SETU</div>
+<div class="chat-last">Community support</div>
+</div>
+</div>
+
+<div class="empty">
+💬<br><br>
+यहाँ आपकी conversations दिखाई देंगी।
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="card profile-box">
+
+<div class="profile-big">P</div>
+
+<h2>आपकी Profile</h2>
+
+<p style="color:#777;margin:7px 0 15px">
+PANIKA SETU सदस्य
+</p>
+
+<button class="primary" onclick="editProfile()">
+✏️ Profile Edit करें
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="section-title">⚙️ Profile Settings</div>
+
+<div class="menu">
+
+<button onclick="showToast('Profile Photo option')">📷 Photo</button>
+<button onclick="showToast('Basic Details')">📝 Details</button>
+<button onclick="showToast('Privacy Settings')">🔒 Privacy</button>
+<button onclick="showToast('Verification')">🛡️ Verification</button>
+<button onclick="showToast('Blocked Users')">🚫 Blocked</button>
+<button onclick="showToast('Support')">🆘 Support</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CREATE -->
+
+<section id="create" class="page">
+
+<div class="card">
+
+<div class="section-title">➕ Create</div>
+
+<button class="modal-option" onclick="createType('post')">
+📝 Create Post
+</button>
+
+<button class="modal-option" onclick="createType('story')">
+⭕ Create Story
+</button>
+
+<button class="modal-option" onclick="createType('event')">
+📅 Create Event
+</button>
+
+<button class="modal-option" onclick="createType('matrimonial')">
+💍 Matrimonial Profile
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section id="search" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">🔎 Search</div>
+
+<div class="form-group">
+<input id="searchInput"
+type="text"
+placeholder="लोग, कार्यक्रम, रिश्ते खोजें..."
+oninput="doSearch()">
+</div>
+
+<div id="searchResult" class="empty">
+कुछ खोजने के लिए ऊपर लिखें।
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">🔔 Notifications</div>
+
+<div class="chat">
+<div class="chat-avatar">👍</div>
+<div class="chat-info">
+<div class="chat-name">PANIKA SETU</div>
+<div class="chat-last">आपका स्वागत है।</div>
+</div>
+</div>
+
+<div class="chat">
+<div class="chat-avatar">📅</div>
+<div class="chat-info">
+<div class="chat-name">नया कार्यक्रम</div>
+<div class="chat-last">समाज का नया कार्यक्रम उपलब्ध है।</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MATRIMONIAL -->
+
+<section id="matrimonial" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">💍 Matrimonial</div>
+
+<p style="color:#666;margin-bottom:15px">
+सम्मानपूर्वक और परिवार की सहमति से रिश्ते तलाशें।
+</p>
+
+<div class="menu">
+<button onclick="showToast('लड़के profiles जल्द उपलब्ध होंगे')">👨 लड़के</button>
+<button onclick="showToast('लड़की profiles जल्द उपलब्ध होंगे')">👩 लड़कियाँ</button>
+<button onclick="showToast('Guardian option')">👨‍👩‍👧 Guardian</button>
+<button onclick="showToast('आपकी matrimonial profile')">💍 मेरी Profile</button>
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom">
+
+<button id="nav-home" class="nav active" onclick="showPage('home')">
+<span>🏠</span>
+Home
+</button>
+
+<button id="nav-events" class="nav" onclick="showPage('events')">
+<span>📅</span>
+Events
+</button>
+
+<button class="create" onclick="openCreate()">
++
+</button>
+
+<button id="nav-chat" class="nav" onclick="showPage('chat')">
+<span>💬</span>
+Chat
+</button>
+
+<button id="nav-profile" class="nav" onclick="showPage('profile')">
+<span>👤</span>
+Profile
+</button>
+
+</nav>
+
+
+<!-- CREATE MODAL -->
+
+<div id="createModal" class="modal-bg" onclick="closeModal(event)">
+
+<div class="modal">
+
+<h3>➕ Create</h3>
+
+<button class="modal-option" onclick="createType('post')">
+📝 Post बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('story')">
+⭕ Story बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('event')">
+📅 Event बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('matrimonial')">
+💍 Matrimonial Profile बनाएं
+</button>
+
+<button class="close" onclick="closeCreate()">
+बंद करें
+</button>
+
+</div>
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(function(section){
+section.classList.remove("active");
+});
+
+var target=document.getElementById(page);
+
+if(target){
+target.classList.add("active");
+}
+
+document.querySelectorAll(".nav").forEach(function(btn){
+btn.classList.remove("active");
+});
+
+if(page==="home"){
+document.getElementById("nav-home").classList.add("active");
+}
+
+if(page==="events"){
+document.getElementById("nav-events").classList.add("active");
+}
+
+if(page==="chat"){
+document.getElementById("nav-chat").classList.add("active");
+}
+
+if(page==="profile"){
+document.getElementById("nav-profile").classList.add("active");
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+}
+
+
+function openCreate(){
+document.getElementById("createModal").classList.add("show");
+}
+
+
+function closeCreate(){
+document.getElementById("createModal").classList.remove("show");
+}
+
+
+function closeModal(e){
+if(e.target.id==="createModal"){
+closeCreate();
+}
+}
+
+
+function createType(type){
+
+closeCreate();
+
+if(type==="post"){
+showPage("create");
+showToast("Post बनाने का option खुल गया");
+}
+
+if(type==="story"){
+showPage("create");
+showToast("Story बनाने का option खुल गया");
+}
+
+if(type==="event"){
+showPage("events");
+showToast("Event section खुल गया");
+}
+
+if(type==="matrimonial"){
+showPage("matrimonial");
+showToast("Matrimonial section खुल गया");
+}
+
+}
+
+
+function showProfile(){
+showPage("profile");
+}
+
+
+function openSearch(){
+showPage("search");
+
+setTimeout(function(){
+var input=document.getElementById("searchInput");
+if(input) input.focus();
+},300);
+}
+
+
+function doSearch(){
+
+var value=document.getElementById("searchInput").value.trim();
+var result=document.getElementById("searchResult");
+
+if(value===""){
+result.innerHTML="कुछ खोजने के लिए ऊपर लिखें।";
+return;
+}
+
+result.innerHTML=
+"🔎 <b>"+value+"</b> के लिए खोज चल रही है...<br><br>"+
+"Search results यहाँ दिखाई देंगे।";
+}
+
+
+function community(button){
+
+document.querySelectorAll(".community button").forEach(function(btn){
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+showToast(button.innerText+" community चुना गया");
+}
+
+
+function likePost(button){
+
+if(button.dataset.liked==="yes"){
+button.innerHTML="👍 पसंद";
+button.dataset.liked="no";
+}else{
+button.innerHTML="👍 पसंद ✓";
+button.dataset.liked="yes";
+}
+
+}
+
+
+function commentPost(){
+
+showToast("Comment feature जल्द Firebase से जुड़ेगा");
+
+}
+
+
+function sharePost(){
+
+if(navigator.share){
+
+navigator.share({
+title:"PANIKA SETU",
+text:"PANIKA SETU — समाज को जोड़ने वाला डिजिटल सेतु"
+});
+
+}else{
+
+showToast("Share option आपके device पर उपलब्ध नहीं है");
+
+}
+
+}
+
+
+function openChat(name){
+
+showToast(name+" chat जल्द उपलब्ध होगी");
+
+}
+
+
+function editProfile(){
+
+showToast("Profile editing जल्द database से जुड़ेगा");
+
+}
+
+
+function showToast(message){
+ huh
+var toast=document.getElementById("toast");
+
+toast.innerText=message;
+toast.classList.add("show");
+
+setTimeout(function(){
+toast.classList.remove("show");
+},2200);
+
+}
+
+
 </script>
 
 </body>
   </html>
+<div class="chat">
+<div class="chat-avatar">👍</div>
+<div class="chat-info">
+<div class="chat-name">PANIKA SETU</div>
+<div class="chat-last">आपका स्वागत है।</div>
+</div>
+</div>
+
+<div class="chat">
+<div class="chat-avatar">📅</div>
+<div class="chat-info">
+<div class="chat-name">नया कार्यक्रम</div>
+<div class="chat-last">समाज का नया कार्यक्रम उपलब्ध है।</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MATRIMONIAL -->
+
+<section id="matrimonial" class="page">
+
+<div class="card">
+
+<button class="back" onclick="showPage('home')">← वापस</button>
+
+<div class="section-title">💍 Matrimonial</div>
+
+<p style="color:#666;margin-bottom:15px">
+सम्मानपूर्वक और परिवार की सहमति से रिश्ते तलाशें।
+</p>
+
+<div class="menu">
+<button onclick="showToast('लड़के profiles जल्द उपलब्ध होंगे')">👨 लड़के</button>
+<button onclick="showToast('लड़की profiles जल्द उपलब्ध होंगे')">👩 लड़कियाँ</button>
+<button onclick="showToast('Guardian option')">👨‍👩‍👧 Guardian</button>
+<button onclick="showToast('आपकी matrimonial profile')">💍 मेरी Profile</button>
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom">
+
+<button id="nav-home" class="nav active" onclick="showPage('home')">
+<span>🏠</span>
+Home
+</button>
+
+<button id="nav-events" class="nav" onclick="showPage('events')">
+<span>📅</span>
+Events
+</button>
+
+<button class="create" onclick="openCreate()">
++
+</button>
+
+<button id="nav-chat" class="nav" onclick="showPage('chat')">
+<span>💬</span>
+Chat
+</button>
+
+<button id="nav-profile" class="nav" onclick="showPage('profile')">
+<span>👤</span>
+Profile
+</button>
+
+</nav>
+
+
+<!-- CREATE MODAL -->
+
+<div id="createModal" class="modal-bg" onclick="closeModal(event)">
+
+<div class="modal">
+
+<h3>➕ Create</h3>
+
+<button class="modal-option" onclick="createType('post')">
+📝 Post बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('story')">
+⭕ Story बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('event')">
+📅 Event बनाएं
+</button>
+
+<button class="modal-option" onclick="createType('matrimonial')">
+💍 Matrimonial Profile बनाएं
+</button>
+
+n class="close" onclick="closeCreate()">
+बंद करें
+</button>
+
+</div>
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(function(section){
+section.classList.remove("active");
+});
+
+var target=document.getElementById(page);
+
+if(target){
+target.classList.add("active");
+}
+
+document.querySelectorAll(".nav").forEach(function(btn){
+btn.classList.remove("active");
+});
+
+if(page==="home"){
+document.getElementById("nav-home").classList.add("active");
+}
+
+if(page==="events"){
+document.getElementById("nav-events").classList.add("active");
+}
+
+if(page==="chat"){
+document.getElementById("nav-chat").classList.add("active");
+}
+
+if(page==="profile"){
+document.getElementById("nav-profile").classList.add("active");
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+}
+
+
+function openCreate(){
+document.getElementById("createModal").classList.add("show");
+}
+
+
+function closeCreate(){
+document.getElementById("createModal").classList.remove("show");
+}
+
+
+function closeModal(e){
+if(e.target.id==="createModal"){
+closeCreate();
+}
+}
+
+
+function createType(type){
+
+closeCreate();
+
+if(type==="post"){
+showPage("create");
+showToast("Post बनाने का option खुल गया");
+}
+
+if(type==="story"){
+showPage("create");
+showToast("Story बनाने का option खुल गया");
+}
+
+if(type==="event"){
+showPage("events");
+showToast("Event section खुल गया");
+}
+
+if(type==="matrimonial"){
+showPage("matrimonial");
+showToast("Matrimonial section खुल गया");
+}
+
+}
+
+
+function showProfile(){
+showPage("profile");
+}
+
+
+function openSearch(){
+showPage("search");
